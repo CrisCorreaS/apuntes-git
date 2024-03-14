@@ -152,10 +152,10 @@
 ![](https://buddy.works/blog/images/gitflow.png)
 
 **Ramas**:
-- 💜 main/master
-- ❤️ dev
-- 🩵 feature1
-- 🧡 feature2
+- ❤️ main/master
+- 🩵 dev
+- 💛 feature1
+- 💜 feature2
 
 1️⃣ Cuando creamos un repositorio ya creamos por defecto la rama **main**, por lo que tenemos que crear la rama **dev** a partir de la rama main:
 <br>
