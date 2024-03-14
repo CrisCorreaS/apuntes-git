@@ -37,6 +37,7 @@
 ## 📈 Comandos básicos
 - `git clone urlHTTPS` -> Clona un repositorio existente de GitHub en tu repositorio remoto
 - `git help [comando]` -> Da información resumida sobre comandos de Git lo cual se utiliza como una guía de ayuda. Si pones "git help commit", se va a abrir una ventana en el navegador con un Manual Page con información sobre "git commit"
+- `git rm nombreArchivo` -> Elimina el archivo del respositorio de Git y también del sistema de archivos local. Este comando es útil cuando deseas eliminar un archivo que ya no necesitas y quieres que este cambio se refleje en el repositorio. Al ejecutar "git rm", el archivo se elimina del directorio de trabajo y del stage, pero no se elimina del historial de commits. Para que este cambio se registre en el historial, es necesario hacer un commit después de ejecutar "git rm"
 ### git add
 - `git add nombreArchivo` -> Agrega ese archivo al staging area de Git
 - `git add .` -> Agrega todos los archivos modificados al área de preparación (staging area) de Git
@@ -105,6 +106,8 @@
 
 - `git reset --hard HEAD^Numero/hashCommit` -> Elimina el commit con todos los cambios, es decir, que los archivos modificados que se guardasen en ese commit, volverían a estar como estaban en el último commit antes de ese. Es una acción "destructiva", por lo que se debe tener cuidado al usarlo, ya que los cambios deshechos no se pueden recuperar fácilmente. Se recomienda utilizarlo con precaución y asegurarse de que realmente deseas eliminar los cambios. Por ejemplo si tengo tres commits y hago el reset hard del segundo commit, los archivos que estuvieran modificados y guardados en el segundo commit, volverían a su estado inicial guardado en el primer commit, pero no se guardarían las modificaciones que se hicieron entre el primer y el segundo commit (porque estaban guardadas en el segundo commit que ha sido borrado). Si borramos algo que no deberíamos, podemos hacer un "git reflog" ver a qué punto queremos volver, buscar el hash que nos interesa restaurar y hacer un "git reset --hard" con ese hash. **Esto se puede hacer antes de hacer un push, si se ha hecho, evita hacerlo**
 
+- `git reset --hard` -> Resetea el stage y el directorio de trabajo al último commit actual. Esto significa que todos los cambios no commiteados en el directorio de trabajo y en el stage serán descartados, y el estado del repositorio volverá al último commit. Este comando es muy poderoso y debe usarse con precaución, ya que los cambios no commiteados se perderán permanentemente. Es bastante parecido a "git checkout -- .", salvo que el "git checkout -- ." sí que guarda los cambios que se subieron al stage.
+
 ### git mv
 - `git mv nombreAntiguo nombreNuevo` -> Renombra o mueve archivos o directorios de Git. En lugar de usar el comando "mv" del sistema de archivos, que Git puede interpretar como eliminar el archivo antiguo y agregar uno nuevo, "git mv" realiza la acción de manera más inteligente, lo que ayuda a mantener el historial de versiones del archivo. Cuando cambiamos el archivo de nombre con "git mv", nos aparece una "R" de Rename. Ejemplos de esto serían: "git mv app/index.html app/indexcambiado.html" para cambiar un archivo de una carpeta o "git mv css styles" para cambiar el nombre de una carpeta
 
@@ -113,7 +116,7 @@
 ``git config --global alias.nombreAlias "comando"`` -> Esto te crea un alias que luego puedes utilizar haciendo "git nombreAlias" y hace el mismo comando que estás poniendo ahí.
 
 > [!NOTE]
-> Para más información sobre los alias, por favor mira el archivo Alias.md 
+> Para más información sobre los alias, por favor mira el archivo [Alias.md](https://github.com/CrisCorreaS/apuntes-git/blob/main/Alias.md)
 
 ## 🌳 Ramas
 ##### ⭐ Comandos para crear una rama y saber en cual estás
@@ -189,6 +192,12 @@
 
 
 ## Otros archivos
-- `.gitignore` -> Se utiliza para especificar archivos y directorios que Git debe ignorar al rastrear los cambios en un repositorio. Puedes usar patrones de coincidencia de nombres de archivo para definir qué archivos y carpetas deben ser ignorados por Git. Por ejemplo, puedes incluir patrones para ignorar archivos de compilación, archivos temporales o archivos específicos generados por el sistema. Esto ayuda a mantener el repositorio limpio y evitar que archivos innecesarios sean incluidos en el control de versiones.
 
+### .gitignore
+- `.gitignore` -> Se utiliza para especificar archivos y directorios que Git debe ignorar al rastrear los cambios en un repositorio. Puedes usar patrones de coincidencia de nombres de archivo para definir qué archivos y carpetas deben ser ignorados por Git. Por ejemplo, puedes incluir patrones para ignorar archivos de compilación, archivos temporales o archivos específicos generados por el sistema. Esto ayuda a mantener el repositorio limpio y evitar que archivos innecesarios sean incluidos en el control de versiones. Se suele poner en la raíz del proyecto, donde también debería de ir la carpeta ".git" que indica que se ha inicializado el repositorio. 
+
+> [!NOTE]
+> Para más información sobre .gitignore, mira el archivo [GitIgnore.md](https://github.com/CrisCorreaS/apuntes-git/blob/main/GitIgnore.md)
+
+### .gitkeep
 - `.gitkeep` -> A diferencia de .gitignore, este archivo no es un archivo oficial de Git. Algunos proyectos pueden utilizarlo para mantener vacíos los directorios vacíos en Git. Git no rastrea los directorios vacíos, por lo que si necesitas que un directorio vacío sea parte de tu repositorio, puedes agregar un archivo .gitkeep dentro de él. Este archivo generalmente está vacío; su nombre sugiere su propósito, que es mantener el directorio dentro del control de versiones.
