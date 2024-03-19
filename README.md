@@ -11,7 +11,7 @@
 > - **R**: Renamed. Indica que el archivo ha sido renombrado.
 > - **D**: Deleted. Indica que el archivo ha sido eliminado del directorio de trabajo pero aún no ha sido committeado el cambio.
 > - **T**: Type-change. Indica que el tipo de archivo ha cambiado, por ejemplo, de un archivo regular a un enlace simbólico o viceversa.
-> - **X**: Unmerged. Indica que el archivo tiene conflictos de fusión que aún no han sido resueltos.
+> - **X** o **!**: Unmerged. Indica que el archivo tiene conflictos de fusión que aún no han sido resueltos.
 
 
 ## ⚙️ Comandos de configuración
@@ -115,10 +115,60 @@
 
 
 ## 🕵 Para alias
-``git config --global alias.nombreAlias "comando"`` -> Esto te crea un alias que luego puedes utilizar haciendo "git nombreAlias" y hace el mismo comando que estás poniendo ahí.
+- ``git config --global alias.nombreAlias "comando"`` -> Esto te crea un alias que luego puedes utilizar haciendo "git nombreAlias" y hace el mismo comando que estás poniendo ahí.
 
 > [!NOTE]
 > Para más información sobre los alias, por favor mira el archivo [Alias.md](https://github.com/CrisCorreaS/apuntes-git/blob/main/Alias.md)
+
+## Para tags
+### git tag
+- `git tag` -> Vemos todas las tags que tenemos.
+- `git tag nombreTag` -> Creamos una tag ligera, que es una referencia a un commit específico, y con esta, podemos descargar el proyecto justo como se encontraba en ese instante. Si no especificamos el hash del commit, lo va a crear en el último commit en el que estemos y debemos tener en cuenta que esta etiqueta no contiene metadatos adicionales como el nombre del autor, la fecha de creación o un mensaje asociado. En general las etiquetas se suelen utilizar para marcar versiones o releases de nuestro código. Ej: creamos un tag que marque la versión 1.0.0 del código con el comando "git tag v1.0.0".
+- `git tag nombreTag hashCommit` -> Creamos una tag ligera en un commit específico, no en el commit actual. Ej: "git tag v0.0.3 c9032ec"
+- `git tag -a nombreTag` -> Creamos una tag anotada, ya que "-a" significa annotated. Una etiqueta anotada es un objeto Git completo en sí mismo. Almacena un hash completo del commit al que apunta, así como metadatos adicionales como el nombre del autor, la fecha de creación y un mensaje asociado. Son útiles para marcar hitos importantes en la historia del proyecto y para proporcionar información adicional sobre esos hitos. Al escribir este comando nos va a mandar poner un mensaje, como si hacemos "git commit" y no incluimos el mensaje, por eso es mejor hacer el siguiente comando:
+- `git tag -a nombreTag -m "Mensaje"` -> Creamos una tag anotada con el mensaje. Es lo mismo que el anterior comando pero añadiendo un mensaje como metadato. Ej: "git tag -a v1.0.0 -m 'Versión 1.0.0 lista'"
+- `git tag -a nombreTag hashCommit -m "Mensaje"` -> Creamos una tag anotada que hace referencia a un commit en concreto que no es en el que estamos. Si no ponemos el hash, la tag se crearía en el commit en el que estemos como habíamos estado haciendo hasta ahora. Ejemplo de una tag anotada en un commit en concreto: "git tag -a v0.1.0 0d34c9e -m 'La versión 0.1.0 está lista'"
+- `git tag -d nombreTag` -> Eliminamos el tag con ese nombre.
+
+### git show
+- `git show nombreTag` -> Nos enseña información sobre la tag. Si hacemos que nos enseñe info de una tag ligera, solo nos enseñará información sobre el commit al que apunta. Si hacemos lo mismo pero con una tag anotada, nos aparecerá la misma información del commit al que apunta y a mayores, información sobre la propia tag (autor, fecha y mensaje). Ej: "git show v0.1.0" 
+
+Ejemplo de tag ligera:
+```
+commit cccfd17f3dbb554ff4f997591c8e735ff2a96fec (tag: v0.0.3)
+Author: Cristina Correa <cristina.correa.segade@gmail.com>
+Date:   Tue Mar 19 03:52:53 2024 +0100
+
+    Añadimos estructura html desde la rama prueba
+...
+```
+
+Ejemplo de tag anotada:
+```
+tag v0.1.0
+Tagger: Cristina Correa <cristina.correa.segade@gmail.com>
+Date:   Tue Mar 19 05:54:52 2024 +0100
+
+La versión 0.1.0 está lista
+
+commit 0d34c9e7bc556c3d2a6a3f3a30562be235c9f2d8 (tag: v0.1.0)
+Merge: c0fe687 8499e9e
+Author: Cristina Correa <cristina.correa.segade@gmail.com>
+Date:   Tue Mar 19 04:24:15 2024 +0100
+
+    Merge branch 'prueba2' merge unión automática
+```
+
+
+
+> [!NOTE]
+> Al crear un tag se puede poner un nombre o una versión semántica. Si usamos una versión semántica tenemos que tener en cuenta que:
+> - El primer dígito significa que hubo cambios importantes en nuestra aplicación o que es una versión mayor. Ej: v1.0.0, v2.0.0 ...
+> - El segundo dígito significa que hemos añadido alguna funcionalidad a la aplicación (una feature) pero no es considerada una versión mayor. Ej: v1.1.0, v1.2.0 ...
+> - El tercer dígito significa que hemos arreglado un bug (bug fix) del código. Ej: v1.0.1, v1.0.2 ...
+> - También se le pueden poner a mayores un "alpha" más un número Ej: v1.2.1-alpha.2, v1.2.1-alpha.3 ... 
+> En definitiva la estructura sería la siguiente: **[major].[minor/feature].[patch]-[build/beta/rc/alpha]**
+> Para saber más puedes consultar [este enlace](https://semver.org/) o [este de la documentación oficial](https://git-scm.com/book/en/v2/Git-Basics-Tagging)
 
 ## 🌳 Ramas
 ### ⭐ Comandos básicos de ramas
@@ -130,7 +180,7 @@
 - `git branch -d nombreRamaBorrar` -> Borra la rama que queramos ya que el "-d" significa delete. Si hay algún cambio en la rama que no esté mergeado, nos lo va a decir y nos va a preguntar si estamos seguros. Lo ideal es tener cuidado con la rama en la que estemos, pero no va a haber ningún problema si estamos en la rama "feature1" y hacemos un "git branch -d feature1" ya que nos moverá automáticamente a otra rama, por ejemplo a "dev" o a "main".
 - `git branch -d nombreRamaBorrar -f` -> Fuerza la eliminación de la rama ya que el "-f" significa force. En este caso, si hay algún cambio en la rama que no esté mergeado, lo va a borrar sin preguntar si estamos seguros. Es mejor utilizar el comando anterior y no este.
 
-### 3️⃣ Tipos de merges que existen con las ramas
+### 3️⃣ tipos de merges que existen con las ramas
 ![](https://github.com/CrisCorreaS/apuntes-git/blob/main/img/img2.png)
 ![](https://github.com/CrisCorreaS/apuntes-git/blob/main/img/img3.png)
 ![](https://github.com/CrisCorreaS/apuntes-git/blob/main/img/img4.png)
@@ -139,6 +189,42 @@
 
 > [!NOTE]
 > Si hacemos un merge de **unión automática** (merge made by the "recursive" strategy), nos va a aparecer una "ventana" en la terminal donde nos dice que tenemos que añadir un mensaje de commit ya que se va a hacer un commit que informe la unión de ambas ramas. Para escribir tenemos que pulsar la `A`, cuando acabemos de poner el mensaje de commit tenemos que pulsar en `ESC` y luego poner `:wq!` y darle a `ENTER`
+
+> [!NOTE]
+> Si hacemos un merge que nos ha dado un conflicto, tenemos que arreglarlo. Por ejemplo: Tenemos dos ramas: la rama "dev" y la rama "feature1" y vamos a crear un conflicto: 
+> - 1º En la rama feature1 hicimos un commit en un archivo de css "style.css": 
+> ```
+> h1 {
+>   font-size: large;
+> }
+> ```
+> - 2º En la rama "dev" también hicimos un commit en el mismo archivo css "style.css" poniendo lo siguiente:
+> ```
+> p {
+>   font-family: Arial, Helvetica, sans-serif;
+> }
+> ```
+> - 3º Estamos en la rama "dev" y hacemos un `git merge feature1` y nos da un conflicto con el archivo "style.css" que se ve así:
+> ```
+> <<<<<<< HEAD
+> p {
+>     font-family: Arial, Helvetica, sans-serif;
+> =======
+> h1 {
+>     font-size: large;
+> >>>>>>> feature1
+> }
+> ```
+> - 4º Queremos ambos cambios y lo queremos hacer manualmente, así que tenemos que quitar las líneas que vscode ha puesto para indicar el conflicto y dejar el archivo como queremos que esté (tenemos que quitar "<<<<<<< HEAD", "=======" y ">>>>>>> feature1" y modificar el archivo para que quede como nos gustaría) por lo que dejamos el archivo así:
+> ```
+> p {
+>     font-family: Arial, Helvetica, sans-serif;
+> }
+> h1 {
+>     font-size: large;
+> }
+> ```
+> - 5º Ahora que tenemos el archivo como nos gustaría, tenemos que hacer un add y un commit para guardar los cambios y conseguir que se haga el merge de las dos ramas satisfactoriamente ya que resolvimos el conflicto. Si hacemos un `git status` en este momento nos va a poner "You have unmerged paths", por lo que hacemos `git commit -am "unión con feature1"`. Si ahora hacemos `git log`, podremos ver que todo está bien y ya se ha unido correctamente
 
 ### 💻 Comandos para llegar a tu rama de GitHub desde tu ordenador 
 - `git clone urlHTTPS` -> Clona un repositorio existente de GitHub en tu repositorio remoto
