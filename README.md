@@ -1,5 +1,7 @@
 # Apuntes de Git
 
+![](https://github.com/CrisCorreaS/apuntes-git/blob/main/img/img1.png)
+
 > [!NOTE]
 > Las letras mayúsculas que aparecen en git al lado de los archivos significan lo siguiente:
 > - **U**: Untracked. Indica que el archivo es nuevo y no ha sido rastreado por Git.
@@ -119,12 +121,12 @@
 > Para más información sobre los alias, por favor mira el archivo [Alias.md](https://github.com/CrisCorreaS/apuntes-git/blob/main/Alias.md)
 
 ## 🌳 Ramas
-##### ⭐ Comandos para crear una rama y saber en cual estás
+### ⭐ Comandos para crear una rama y saber en cual estás
 - `git branch` -> Muestra todas las ramas locales de tu repositorio de GitHub y la rama en la que te encuentras actualmente se marca con un asterisco y un color diferente
 - `git branch nombreRama` -> Crea una nueva rama con el nombre especificado
 - `git checkout nombreRama` -> Cambia tu rama actual por la rama que has especificado
 - `git branch -m nombreAntiguoRama nombreNuevoRama` -> Cambiamos el nombre a la rama en la que estamos por el nombreNuevoRama. Esto se suele hacer mucho para cambiar el nombre de rama master a main.
-##### 💻 Comandos para llegar a tu rama de GitHub desde tu ordenador 
+### 💻 Comandos para llegar a tu rama de GitHub desde tu ordenador 
 - `git clone urlHTTPS` -> Clona un repositorio existente de GitHub en tu repositorio remoto
 - `git branch` -> Muestra todas las ramas locales de tu repositorio de GitHub y la rama en la que te encuentras actualmente se marca con un asterisco y un color diferente. Si solo aparece la rama "main" tienes que hacer los siguientes comandos
   - `git fetch` -> Recupera los cambios remotos (como ramas y commits) desde el repositorio de GitHub pero no los fusiona con tu rama actual. Es útil para obtener información actualizada sobre las ramas remotas sin modificar tu trabajo actual.
@@ -149,7 +151,7 @@
 
 **Para crear una estructura como esta:**
 
-![](https://buddy.works/blog/images/gitflow.png)
+![](https://github.com/CrisCorreaS/apuntes-git/blob/main/img/img5.png)
 
 **Ramas**:
 - ❤️ main/master
