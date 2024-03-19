@@ -145,7 +145,8 @@
 - `git checkout nombreRama` -> Cambia a la rama llamada "nombreRama"
 - `git branch` -> Muestra todas las ramas locales de tu repositorio de GitHub y la rama en la que te encuentras actualmente se marca con un asterisco y un color diferente.
 
-#### 👉 Comandos para gestionar las ramas
+
+### 👉 Comandos para gestionar las ramas
 > [!IMPORTANT]
 > Antes de empezar con las ramas, por favor mira este apartado porque es importante para saber bien cómo hacer con las ramas
 
@@ -191,6 +192,11 @@
 > - ``git checkout -b ramaNueva ramaDesdeLaQueCreamosLaRamaNueva``
 > - ``git merge ramaQueQueremosFusionarConLaRamaEnLaQueEstamos``
 > - ``git branch -d ramaQueBorramos``
+
+### 3️⃣ Tipos de merges que existen con las ramas
+![](https://github.com/CrisCorreaS/apuntes-git/blob/main/img/img2.png)
+![](https://github.com/CrisCorreaS/apuntes-git/blob/main/img/img3.png)
+![](https://github.com/CrisCorreaS/apuntes-git/blob/main/img/img4.png)
 
 
 ## Otros archivos
