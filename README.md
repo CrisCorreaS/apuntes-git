@@ -125,8 +125,9 @@
 - `git branch` -> Muestra todas las ramas locales de tu repositorio de GitHub y la rama en la que te encuentras actualmente se marca con un asterisco y un color diferente
 - `git branch nombreRama` -> Crea una nueva rama con el nombre especificado
 - `git checkout nombreRama` -> Cambia tu rama actual por la rama que has especificado
+- `git checkout -b nombreRama` -> Crea una nueva rama y te mueve directamente a la rama que has creado ya que "-b" significa branch. Este es el equivalente al hacer un "git branch x" para crear la rama y luego un "git checkout x" para moverte a la rama, pero simplificadamente.
 - `git branch -m nombreAntiguoRama nombreNuevoRama` -> Cambiamos el nombre a la rama en la que estamos por el nombreNuevoRama. Esto se suele hacer mucho para cambiar el nombre de rama master a main.
-- `git branch -d nombreRamaBorrar` -> Borra la rama que queramos ya que el "-d" significa delete. Si hay algún cambio en la rama que no esté mergeado, nos lo va a decir y nos va a preguntar si estamos seguros. Tenemos que tener cuidado con la rama en la que estemos, si queremos borrar la rama "feature1", no podemos estar en "feature1" cuando la borremos, pero sí podemos estar en la rama "main" o en la rama "dev" para hacer un "git branch -d feature1". 
+- `git branch -d nombreRamaBorrar` -> Borra la rama que queramos ya que el "-d" significa delete. Si hay algún cambio en la rama que no esté mergeado, nos lo va a decir y nos va a preguntar si estamos seguros. Lo ideal es tener cuidado con la rama en la que estemos, pero no va a haber ningún problema si estamos en la rama "feature1" y hacemos un "git branch -d feature1" ya que nos moverá automáticamente a otra rama, por ejemplo a "dev" o a "main".
 - `git branch -d nombreRamaBorrar -f` -> Fuerza la eliminación de la rama ya que el "-f" significa force. En este caso, si hay algún cambio en la rama que no esté mergeado, lo va a borrar sin preguntar si estamos seguros. Es mejor utilizar el comando anterior y no este.
 
 ### 3️⃣ Tipos de merges que existen con las ramas
@@ -134,8 +135,10 @@
 ![](https://github.com/CrisCorreaS/apuntes-git/blob/main/img/img3.png)
 ![](https://github.com/CrisCorreaS/apuntes-git/blob/main/img/img4.png)
 
-### Comandos para unir una rama a otra
 - `git merge ramaConCambios` -> Une los cambios de la "ramaConCambios" a la rama en donde nos encontramos. Siempre que se vaya a unir una rama a otra, debemos de estar en la rama que va a recibir los cambios. Si queremos actualizar la rama "dev" con una nueva funcionalidad de la rama "feature1", tenemos que colocarnos en "dev" para recibir esos cambios y luego hacer un "git merge feature1". Normalmente (e idealmente), siempre se hará un Fast-forward lo cual significa que no hay ningún conflicto.
+
+> [!NOTE]
+> Si hacemos un merge de **unión automática** (merge made by the "recursive" strategy), nos va a aparecer una "ventana" en la terminal donde nos dice que tenemos que añadir un mensaje de commit ya que se va a hacer un commit que informe la unión de ambas ramas. Para escribir tenemos que pulsar la `A`, cuando acabemos de poner el mensaje de commit tenemos que pulsar en `ESC` y luego poner `:wq!` y darle a `ENTER`
 
 ### 💻 Comandos para llegar a tu rama de GitHub desde tu ordenador 
 - `git clone urlHTTPS` -> Clona un repositorio existente de GitHub en tu repositorio remoto
