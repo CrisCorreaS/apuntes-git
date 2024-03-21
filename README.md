@@ -29,6 +29,7 @@
 - `git config --global -e` -> Te muestra el archivo de configuración global
 - `git config --list` -> Enseña todas las configuraciones de Git.
 - `git config --global user.ParametroQueremosSaber` -> Enseña el parámetro por defecto que has almacenado en la configuración global. Ej; "git config --global user.email" te devuelve el email que has guardado
+- 
 ### Cambiar configuración
 - `git config --global --replace-all user.name "Nombre Apellido"` -> Establece o actualiza el nombre de usuario global.
 - `git config --global --replace-all user.email email@email.com` -> Establece o actualiza el correo electrónico global.
@@ -67,7 +68,7 @@
 ### git pull
 - `git pull` -> Descarga los cambios del repositorio remoto de GitHub a tu repositorio local
   
-## 📒 Para saber información
+## 📚 Para saber información
 ### git status
 - ``git status`` -> Muestra el estado actual del repositorio de trabajo y el área de preparación. Proporciona información sobre qué archivos han sido modificados, agregados o eliminados desde el último commit, así como también los archivos que están en el área de preparación esperando ser confirmados en el próximo commit.
 - `git status --short` -> Hace un resumen muy condensado de la información de cada archivo excepto de los que hayas commiteado pero no hayas modificado más.
@@ -98,7 +99,6 @@
 - `git show nombreTag` ->  Nos enseña información sobre la tag. Para info más detallada ir a "tags"
 
 ## 📝 Para hacer modificaciones
-
 ### git checkout
 - ``git checkout archivo/commit`` -> Es para volver a un punto específico. Afecta a archivos, commits y ramas. En archivos, quita cambios que no están commiteados (cuando un archivo esta "M"); en commits, puedes moverte a otros commits y ver los archivos, pero hay que tener cuidado con "The Detached HEAD State"; y en ramas, puedes moverte a diferentes ramas. Utilizar "git checkout" con ramas está desaconsejado desde la versión 2.23 de Git, por lo que ahora para esa funcionalidad utilizamos "git switch"
 - `git checkout -- .` -> Recupera el estado de los archivos como estaban en el último commit. Si tienes algún archivo modificado que tiene un error pero cuando hiciste commit estaba bien, puedes volver a la versión del archivo que estaba bien con este comando. Esto no afecta a los archivos que hemos creado, son nuevos y nunca han sido stageados (son los que tienen una U de "untracked"), pero sí a cualquier otro archivo (incluso restaura los que borraste).
@@ -120,7 +120,7 @@
 > [!NOTE]
 > Para más información sobre los alias, por favor mira el archivo [Alias.md](https://github.com/CrisCorreaS/apuntes-git/blob/main/Alias.md)
 
-## Para tags
+## 🏷 Para tags
 ### git tag
 - `git tag` -> Vemos todas las tags que tenemos.
 - `git tag nombreTag` -> Creamos una tag ligera, que es una referencia a un commit específico, y con esta, podemos descargar el proyecto justo como se encontraba en ese instante. Si no especificamos el hash del commit, lo va a crear en el último commit en el que estemos y debemos tener en cuenta que esta etiqueta no contiene metadatos adicionales como el nombre del autor, la fecha de creación o un mensaje asociado. En general las etiquetas se suelen utilizar para marcar versiones o releases de nuestro código. Ej: creamos un tag que marque la versión 1.0.0 del código con el comando "git tag v1.0.0".
@@ -171,7 +171,7 @@ Date:   Tue Mar 19 04:24:15 2024 +0100
 > Para saber más puedes consultar [este enlace](https://semver.org/) o [este de la documentación oficial](https://git-scm.com/book/en/v2/Git-Basics-Tagging)
 
 ## 🌳 Ramas
-### ⭐ Comandos básicos de ramas
+### Comandos básicos de ramas
 - `git branch` -> Muestra todas las ramas locales de tu repositorio de GitHub y la rama en la que te encuentras actualmente se marca con un asterisco y un color diferente
 - `git branch nombreRama` -> Crea una nueva rama con el nombre especificado
 - `git switch nombreRama` -> Cambia tu rama actual por la rama que has especificado. Antes de la versión de Git 2.23 se usaba "git checkout nombreRama" para hacer esto, pero ahora es recomendable hacerlo con "git switch"
@@ -296,7 +296,7 @@ Date:   Tue Mar 19 04:24:15 2024 +0100
 
 
 
-## Otros archivos
+## 🗃 Otros archivos
 
 ### .gitignore
 - `.gitignore` -> Se utiliza para especificar archivos y directorios que Git debe ignorar al rastrear los cambios en un repositorio. Puedes usar patrones de coincidencia de nombres de archivo para definir qué archivos y carpetas deben ser ignorados por Git. Por ejemplo, puedes incluir patrones para ignorar archivos de compilación, archivos temporales o archivos específicos generados por el sistema. Esto ayuda a mantener el repositorio limpio y evitar que archivos innecesarios sean incluidos en el control de versiones. Se suele poner en la raíz del proyecto, donde también debería de ir la carpeta ".git" que indica que se ha inicializado el repositorio. 
