@@ -3,8 +3,11 @@
 ```
 [alias]
 	lg = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all
+	lgd = log --date-order --date=iso --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)%ad%x08%x08%x08%x08%x08%x08%x08%x08%x08%x08%x08%x08%x08%x08%x08 %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all
 	ss = status --short
 ```
+> [!NOTE]
+> El alias **lg** usa la fecha relativa que muestra los commits en el orden predeterminado de Git y te dice hace cuanto se hizo el commit. El alias **lgd** usa la fecha absoluta que ordena los commits cronológicamente en formato ISO (AAAA-MM-DD).
 
 ## Otros alias interesantes
 ```
