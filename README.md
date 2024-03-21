@@ -57,7 +57,6 @@
 - `git commit -m "Mensaje"` ->  Crea un nuevo commit con los cambios que se encuentran en el staging area. El mensaje (-m "Mensaje") es una descripción breve de los cambios que se incluyen en el commit
 - `git commit -am "Mensaje"` -> Hace un git add y un git commit a la vez gracias al "-a" que es la abreviatura de git add (la "m" es la abreviatura del mensaje que también utilizábamos en el anterior comando)
 - `git commit --amend` -> Abre en la terminal información sobre el último commit y se puede cambiar el mensaje de este. Pero es mucho más sencillo hacerlo de la siguiente manera:
-
 - `git commit --amend -m "Nuevo Mensaje"` -> Cambia el mensaje del último commit que has hecho por el nuevo mensaje
 
 > [!NOTE]
@@ -71,22 +70,21 @@
 ## 📒 Para saber información
 ### git status
 - ``git status`` -> Muestra el estado actual del repositorio de trabajo y el área de preparación. Proporciona información sobre qué archivos han sido modificados, agregados o eliminados desde el último commit, así como también los archivos que están en el área de preparación esperando ser confirmados en el próximo commit.
-
 - `git status --short` -> Hace un resumen muy condensado de la información de cada archivo excepto de los que hayas commiteado pero no hayas modificado más.
 
 ### git log
 - ``git log`` -> Muestra un historial de todos los commits en tu repositorio. Cada commit incluye un ID de commit único, el autor del commit, la fecha y hora del commit, y un mensaje de commit que describe los cambios realizados en ese commit (por eso es muy importante configurar el nombre y el mail)
+- `git log nombreArchivo` -> Para ver solo los commits que incluyen cambios en ese archivo. Esto es útil para rastrear la historia de un archivo en particular a lo largo del tiempo 
 - `git log --stat` -> Es una versión más descriptiva del "git log" que nos da información detallada sobre los archivos que fueron modificadas y cuántas líneas se añadieron o eliminaron en cada commit.
-- `git log -p` -> Es lo mismo que hacer "git log --patch". Esta es una versión mucho más descriptiva que la anterior. Aquí no solo muestra los archivos que fueron modificados y el número de líneas totales, sino que también muestra los cambios exactos: Nos dice que en "index.html" añadimos una lista desordenada mostrándola en verde, y que quitamos el encabezado de nivel uno que ahora aparece en rojo.
+- `git log -p` -> Es lo mismo que hacer "git log --patch". Esta es una versión mucho más descriptiva que la anterior. Aquí no solo muestra los archivos que fueron modificados y el número de líneas totales, sino que también muestra los cambios exactos: Nos dice que en "index.html" añadimos una lista desordenada mostrándola en verde, y que quitamos el encabezado de nivel uno que ahora aparece en rojo
+- `git log --since [numeroAño/]numeroMes/numeroDía` -> Nos da todo el histórico de commits desde el día que hayamos puesto. Ej: "git log --since 3/6" nos da el histórico desde el 6 de Marzo de este año y "git log --since 2024/10/1" nos da el histórico desde el 1 de Octubre de 2024
 - ``git log --graph`` -> Igual que el "git log" de siempre pero con una información visual a mayores de las ramas 
 - ``git log --graph --pretty=oneline`` -> Igual que el anterior pero todo resumido en una línea
 - ``git log --decorate --all --oneline`` -> Igual que el anterior pero con el hash mucho más simple en vez del largo
 
 ### git diff
 - `git diff` -> Muestra las diferencias entre dos estados diferentes en el respositorio Git. Estos estados pueden ser entre el directorio de trabajo y el stage, entre el stage y el commit más reciente, o entre dos commits diferentes. Cuando ejecutas "git diff" sin ningún argumento adicional, muestra las diferencias entre el directorio de trabajo y el staging area, es decir, las modificaciones que aún no se han añadido al tatage. Esto te permite revisar los cambios que has realizado antes de confirmarlos con un commit. (Es más visual la herramienta de visualización de vscode)
-
 - `git diff --staged` -> Enseña las diferencias entre el staging area y el último commit. Esto significa que te muestra los cambios que han sido añadidos al stage, pero aún no se han confirmado con un commit. Es lo mismo que hacer `git diff --cached` 
-
 - `git diff HEAD`-> Muestra las diferencias entre el directorio de trabajo y el commit más reciente.
 - `git diff hashCommit` -> Enseña las diferencias entre el directorio de trabajo y el commit especificado.
 - `git diff hashCommitInicial hashCommitFinal` -> Muestra las diferencias entre dos commits específicos.
@@ -95,22 +93,21 @@
 ### git reflog
 - `git reflog` -> Muestra un registro de referencia del historial de cambios realizados en HEAD (puntero a la rama actual) y otras referencias de Git, como ramas y etiquetas. La palabra "reflog" es una abreviatura de "registro de referencia de log". Este registro puede ser útil para recuperar cambios perdidos o deshacer acciones no deseadas, como restablecer ramas a estados anteriores o recuperar commits eliminados accidentalmente con "git reset --hard".
 
+### git show
+- `git show hashCommit` -> Muestra información detallada sobre un commit específico identificado por su hash. Proporciona detalles específicos del commit seleccionado, incluyendo el autor, la fecha, el mensaje del commit y los cambios introducidos por ese commit. No solo muestra las diferencias como hace "git diff", sino también la información del commit en sí (autor, fecha y mensaje). Es útil para inspeccionar un commit específico en detalle y comprender qué cambios se introdujeron en él.
+- `git show nombreTag` ->  Nos enseña información sobre la tag. Para info más detallada ir a "tags"
+
 ## 📝 Para hacer modificaciones
 
 ### git checkout
 - ``git checkout archivo/commit/rama`` -> Es para volver a un punto específico. Afecta a archivos, commits y ramas. En archivos, quita cambios que no están commiteados (cuando un archivo esta "M"); en commits, puedes moverte a otros commits y ver los archivos, pero hay que tener cuidado con "The Detached HEAD State"; y en ramas, puedes moverte a diferentes ramas.
-
 - `git checkout -- .` -> Recupera el estado de los archivos como estaban en el último commit. Si tienes algún archivo modificado que tiene un error pero cuando hiciste commit estaba bien, puedes volver a la versión del archivo que estaba bien con este comando. Esto no afecta a los archivos que hemos creado, son nuevos y nunca han sido stageados (son los que tienen una U de "untracked"), pero sí a cualquier otro archivo (incluso restaura los que borraste).
 
 ### git reset
 - ``git reset []`` -> Permite RESTABLECER tu estado actual a un estado específico. Puedes restablecer el estado de archivos específicos, así como el de toda una rama. Esto es útil si aún no has subido tu commit a GitHub o a otro repositorio remoto. El git reset también se podía usar como la antítesis de "git add" como vimos anteriormente.
-
 - `git reset --soft HEAD^Numero/hashCommit` -> Borra un commit pero guarda los cambios en el stage (gracias al --soft). Es decir, git moverá la rama actual hacia el commit especificado, pero mantendrá los cambios realizados en el staging area. Esto significa que los cambios se retiran del commit, pero permanecen listos para ser confirmados nuevamente con un nuevo commit. Aquí se puede usar "HEAD^Numero" o el propio hash del commit que queramos eliminar. Si queremos eliminar el último commit sería "git reset --soft HEAD^1". Esto se usa por ejemplo si en el commit x se te olvidó poner otros archivos y quieres incluirlos. Tu lo que haces es borrar ese commit y crear uno nuevo con los archivos del commit anterior (con sus modificaciones guardadas) y los que quisieras añadir. **Esto se puede hacer antes de hacer un push, si se ha hecho, evita hacerlo**
-
 - `git reset --mixed HEAD^Numero/hashCommit` -> Borra un commit, no guarda los cambios en el stage pero sí que los guarda en el área de trabajo local (gracias al --mixed). Este es el comportamiento predeterminado de "git reset" si no se especifica ningún argumento. Con "--mixed", Git moverá la rama actual hacia el commit especificado y deshará los cambios en el staging area, pero mantendrá los cambios en el directorio de trabajo. Esto significa que los cambios deshechos no se perderán, pero tendrás que agregarlos nuevamente al stage si deseas confirmarlos nuevamente. **Esto se puede hacer antes de hacer un push, si se ha hecho, evita hacerlo**
-
 - `git reset --hard HEAD^Numero/hashCommit` -> Elimina el commit con todos los cambios, es decir, que los archivos modificados que se guardasen en ese commit, volverían a estar como estaban en el último commit antes de ese. Es una acción "destructiva", por lo que se debe tener cuidado al usarlo, ya que los cambios deshechos no se pueden recuperar fácilmente. Se recomienda utilizarlo con precaución y asegurarse de que realmente deseas eliminar los cambios. Por ejemplo si tengo tres commits y hago el reset hard del segundo commit, los archivos que estuvieran modificados y guardados en el segundo commit, volverían a su estado inicial guardado en el primer commit, pero no se guardarían las modificaciones que se hicieron entre el primer y el segundo commit (porque estaban guardadas en el segundo commit que ha sido borrado). Si borramos algo que no deberíamos, podemos hacer un "git reflog" ver a qué punto queremos volver, buscar el hash que nos interesa restaurar y hacer un "git reset --hard" con ese hash. **Esto se puede hacer antes de hacer un push, si se ha hecho, evita hacerlo**
-
 - `git reset --hard` -> Resetea el stage y el directorio de trabajo al último commit actual. Esto significa que todos los cambios no commiteados en el directorio de trabajo y en el stage serán descartados, y el estado del repositorio volverá al último commit. Este comando es muy poderoso y debe usarse con precaución, ya que los cambios no commiteados se perderán permanentemente. Es bastante parecido a "git checkout -- .", salvo que el "git checkout -- ." sí que guarda los cambios que se subieron al stage.
 
 ### git mv
