@@ -55,7 +55,7 @@
 - `git reset nombreCarpeta/*.extensiónArchivos` -> Elimina al stage todos los archivos con una extensión en específico que estén en esa carpeta, por ejemplo "git reset js/*.js" elimina todos los archivos .js que estén en la carpeta "js"
 ### git commit
 - `git commit -m "Mensaje"` ->  Crea un nuevo commit con los cambios que se encuentran en el staging area. El mensaje (-m "Mensaje") es una descripción breve de los cambios que se incluyen en el commit
-- `git commit -am "Mensaje"` -> Hace un git add y un git commit a la vez gracias al "-a" que es la abreviatura de git add (la "m" es la abreviatura del mensaje que también utilizábamos en el anterior comando)
+- `git commit -am "Mensaje"` -> Hace un git add y un git commit a la vez gracias al "-a" que es la abreviatura de "git add" (la "m" es la abreviatura del mensaje que también utilizábamos en el anterior comando)
 - `git commit --amend` -> Abre en la terminal información sobre el último commit y se puede cambiar el mensaje de este. Pero es mucho más sencillo hacerlo de la siguiente manera:
 - `git commit --amend -m "Nuevo Mensaje"` -> Cambia el mensaje del último commit que has hecho por el nuevo mensaje
 
@@ -100,7 +100,7 @@
 ## 📝 Para hacer modificaciones
 
 ### git checkout
-- ``git checkout archivo/commit/rama`` -> Es para volver a un punto específico. Afecta a archivos, commits y ramas. En archivos, quita cambios que no están commiteados (cuando un archivo esta "M"); en commits, puedes moverte a otros commits y ver los archivos, pero hay que tener cuidado con "The Detached HEAD State"; y en ramas, puedes moverte a diferentes ramas.
+- ``git checkout archivo/commit`` -> Es para volver a un punto específico. Afecta a archivos, commits y ramas. En archivos, quita cambios que no están commiteados (cuando un archivo esta "M"); en commits, puedes moverte a otros commits y ver los archivos, pero hay que tener cuidado con "The Detached HEAD State"; y en ramas, puedes moverte a diferentes ramas. Utilizar "git checkout" con ramas está desaconsejado desde la versión 2.23 de Git, por lo que ahora para esa funcionalidad utilizamos "git switch"
 - `git checkout -- .` -> Recupera el estado de los archivos como estaban en el último commit. Si tienes algún archivo modificado que tiene un error pero cuando hiciste commit estaba bien, puedes volver a la versión del archivo que estaba bien con este comando. Esto no afecta a los archivos que hemos creado, son nuevos y nunca han sido stageados (son los que tienen una U de "untracked"), pero sí a cualquier otro archivo (incluso restaura los que borraste).
 
 ### git reset
@@ -174,8 +174,9 @@ Date:   Tue Mar 19 04:24:15 2024 +0100
 ### ⭐ Comandos básicos de ramas
 - `git branch` -> Muestra todas las ramas locales de tu repositorio de GitHub y la rama en la que te encuentras actualmente se marca con un asterisco y un color diferente
 - `git branch nombreRama` -> Crea una nueva rama con el nombre especificado
-- `git checkout nombreRama` -> Cambia tu rama actual por la rama que has especificado
-- `git checkout -b nombreRama` -> Crea una nueva rama y te mueve directamente a la rama que has creado ya que "-b" significa branch. Este es el equivalente al hacer un "git branch x" para crear la rama y luego un "git checkout x" para moverte a la rama, pero simplificadamente.
+- `git switch nombreRama` -> Cambia tu rama actual por la rama que has especificado. Antes de la versión de Git 2.23 se usaba "git checkout nombreRama" para hacer esto, pero ahora es recomendable hacerlo con "git switch"
+- `git switch -c nombreRama` -> Crea una nueva rama y te mueve directamente a la rama que has creado ya que "-c" significa create. Este es el equivalente al hacer un "git branch x" para crear la rama y luego un "git switch x" para moverte a la rama, pero simplificadamente. Anteriormente se hacía "git checkout -b nombreRama" para hacer lo mismo, pero desde la versión 2.23 de Git, esto ha cambiado.
+- `git switch -c ramaNueva -t ramaOrigen` -> Crea una nueva rama basada en otra existente. Tenemos que usar la opción -c de "create" junto con la opción -t de "track" para especificar la rama de origen. La opción -t establece la nueva rama para rastrear la rama especificada, lo que significa que cuando cambiamos a la nueva rama, Git intentará rebasear automáticamente los cambios de la rama de origen. 
 - `git branch -m nombreAntiguoRama nombreNuevoRama` -> Cambiamos el nombre a la rama en la que estamos por el nombreNuevoRama. Esto se suele hacer mucho para cambiar el nombre de rama master a main.
 - `git branch -d nombreRamaBorrar` -> Borra la rama que queramos ya que el "-d" significa delete. Si hay algún cambio en la rama que no esté mergeado, nos lo va a decir y nos va a preguntar si estamos seguros. Lo ideal es tener cuidado con la rama en la que estemos, pero no va a haber ningún problema si estamos en la rama "feature1" y hacemos un "git branch -d feature1" ya que nos moverá automáticamente a otra rama, por ejemplo a "dev" o a "main".
 - `git branch -d nombreRamaBorrar -f` -> Fuerza la eliminación de la rama ya que el "-f" significa force. En este caso, si hay algún cambio en la rama que no esté mergeado, lo va a borrar sin preguntar si estamos seguros. Es mejor utilizar el comando anterior y no este.
@@ -242,7 +243,7 @@ Date:   Tue Mar 19 04:24:15 2024 +0100
     ` remotes/origin/cris` <br>
     ` remotes/origin/main` <br>
     ` remotes/origin/marta` <br>
-- `git checkout nombreRama` -> Cambia a la rama llamada "nombreRama"
+- `git switch nombreRama` -> Cambia a la rama llamada "nombreRama"
 - `git branch` -> Muestra todas las ramas locales de tu repositorio de GitHub y la rama en la que te encuentras actualmente se marca con un asterisco y un color diferente.
 
 
@@ -262,19 +263,19 @@ Date:   Tue Mar 19 04:24:15 2024 +0100
 
 1️⃣ Cuando creamos un repositorio ya creamos por defecto la rama **main**, por lo que tenemos que crear la rama **dev** a partir de la rama main:
 <br>
-``git checkout -b dev main`` -> Con esto creamos la rama dev a partir de la rama main y nos situamos en la rama dev
+``git switch -c dev -t main`` -> Con esto creamos la rama dev a partir de la rama main y nos situamos en la rama dev
 <br><br>
 2️⃣ Una vez creada la rama **dev**, desarrollamos cualquier cosa y hacemos un commit _(el primer circulito de la rama dev)_ tenemos que crear a partir de esta, la rama **feature1** (la azul):
 <br>
-``git checkout -b feature1 dev`` -> Con esto creamos la rama feature1 a partir de la rama dev y nos situamos en la rama feature1
+``git switch -c feature1 -t dev`` -> Con esto creamos la rama feature1 a partir de la rama dev y nos situamos en la rama feature1
 <br><br>
 3️⃣ Ahora, en la rama **feature1**, desarrollamos código y hacemos commits _(todos los círculos que tiene la rama feature1 azul)_
 <br><br>
-4️⃣ Por otro lado, nos vamos a pasar a **dev** para corregir un bug ``git checkout dev`` y una vez corregido, hacemos un commit _(el segundo círculito de la rama dev)_ . Ahora que está corregido el bug, creamos la rama **feature2**:
+4️⃣ Por otro lado, nos vamos a pasar a **dev** para corregir un bug ``git switch dev`` y una vez corregido, hacemos un commit _(el segundo círculito de la rama dev)_ . Ahora que está corregido el bug, creamos la rama **feature2**:
 <br>
-``git checkout -b feature2 dev`` -> Con esto creamos la rama feature2 a partir de la rama dev, y nos situamos en feature2
+``git switch -c feature2 -t dev`` -> Con esto creamos la rama feature2 a partir de la rama dev, y nos situamos en feature2
 <br><br>
-5️⃣ En la rama **feature2**, desarrollamos código y hacemos un commit para guardarlo _(el único circulito de la rama feature2 naranja)_. Nos pasamos a la rama **dev** con el comando ``git checkout dev`` y en la rama **dev** cambiamos el README.md y hacemos un commit _(el tercer circulito de la rama dev)_ 
+5️⃣ En la rama **feature2**, desarrollamos código y hacemos un commit para guardarlo _(el único circulito de la rama feature2 naranja)_. Nos pasamos a la rama **dev** con el comando ``git switch dev`` y en la rama **dev** cambiamos el README.md y hacemos un commit _(el tercer circulito de la rama dev)_ 
 <br><br>
 6️⃣ Ahora, vamos a hacer un merge de la rama **feature2** en la rama **dev**. Para esto tenemos que estar en la rama **dev** y escribir el siguiente comando:
 <br>
@@ -289,7 +290,7 @@ Date:   Tue Mar 19 04:24:15 2024 +0100
 
 > [!NOTE]
 > Los comandos más importantes que usaremos de ramas serán:
-> - ``git checkout -b ramaNueva ramaDesdeLaQueCreamosLaRamaNueva``
+> - ``git switch -b ramaNueva -t ramaDesdeLaQueCreamosLaRamaNueva``
 > - ``git merge ramaQueQueremosFusionarConLaRamaEnLaQueEstamos``
 > - ``git branch -d ramaQueBorramos``
 
