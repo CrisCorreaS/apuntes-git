@@ -7,7 +7,8 @@
 	ss = status --short
 ```
 > [!NOTE]
-> El alias **lg** usa la fecha relativa que muestra los commits en el orden predeterminado de Git y te dice hace cuanto se hizo el commit. El alias **lgd** usa la fecha absoluta que ordena los commits cronológicamente en formato ISO (AAAA-MM-DD).
+> - El alias **lg** usa la fecha relativa que muestra los commits en el orden predeterminado de Git y te dice hace cuanto se hizo el commit.
+> - El alias **lgd** usa la fecha absoluta que ordena los commits cronológicamente en formato ISO (AAAA-MM-DD).
 
 ## Otros alias interesantes
 ```
