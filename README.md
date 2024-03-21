@@ -28,6 +28,7 @@
 ### Ver configuración
 - `git config --global -e` -> Te muestra el archivo de configuración global
 - `git config --list` -> Enseña todas las configuraciones de Git.
+- `git config --global user.ParametroQueremosSaber` -> Enseña el parámetro por defecto que has almacenado en la configuración global. Ej; "git config --global user.email" te devuelve el email que has guardado
 ### Cambiar configuración
 - `git config --global --replace-all user.name "Nombre Apellido"` -> Establece o actualiza el nombre de usuario global.
 - `git config --global --replace-all user.email email@email.com` -> Establece o actualiza el correo electrónico global.
@@ -59,6 +60,9 @@
 
 - `git commit --amend -m "Nuevo Mensaje"` -> Cambia el mensaje del último commit que has hecho por el nuevo mensaje
 
+> [!NOTE]
+> Para saber más sobre los commits, qué es un hash, qué significa HEAD y demás, puedes consultar el archivo [Commit.md](https://github.com/CrisCorreaS/apuntes-git/blob/main/Commit.md)
+
 ### git push
 - `git push` -> Sube los commits del repositorio local al repositorio remoto de GitHub
 ### git pull
@@ -72,11 +76,10 @@
 
 ### git log
 - ``git log`` -> Muestra un historial de todos los commits en tu repositorio. Cada commit incluye un ID de commit único, el autor del commit, la fecha y hora del commit, y un mensaje de commit que describe los cambios realizados en ese commit (por eso es muy importante configurar el nombre y el mail)
-
-- ``git log --graph`` -> Igual que el git log de siempre pero con una información visual a mayores de las ramas 
-
+- `git log --stat` -> Es una versión más descriptiva del "git log" que nos da información detallada sobre los archivos que fueron modificadas y cuántas líneas se añadieron o eliminaron en cada commit.
+- `git log -p` -> Es lo mismo que hacer "git log --patch". Esta es una versión mucho más descriptiva que la anterior. Aquí no solo muestra los archivos que fueron modificados y el número de líneas totales, sino que también muestra los cambios exactos: Nos dice que en "index.html" añadimos una lista desordenada mostrándola en verde, y que quitamos el encabezado de nivel uno que ahora aparece en rojo.
+- ``git log --graph`` -> Igual que el "git log" de siempre pero con una información visual a mayores de las ramas 
 - ``git log --graph --pretty=oneline`` -> Igual que el anterior pero todo resumido en una línea
-
 - ``git log --decorate --all --oneline`` -> Igual que el anterior pero con el hash mucho más simple en vez del largo
 
 ### git diff
@@ -115,7 +118,7 @@
 
 
 ## 🕵 Para alias
-- ``git config --global alias.nombreAlias "comando"`` -> Esto te crea un alias que luego puedes utilizar haciendo "git nombreAlias" y hace el mismo comando que estás poniendo ahí.
+- ``git config --global alias.nombreAlias "comando"`` -> Esto te crea un alias que luego puedes utilizar haciendo "git nombreAlias" y hace el mismo comando que estás poniendo ahí. Cuando decimos "comando", nos referimos a todo lo que vaya después de "git", ya que si en el comando ponemos "git ..." nos va a dar el error "expansion of alias 'nombreAlias' failed; 'git' is not a git command", por lo que **NO ponemos "git" dentro del comando"
 
 > [!NOTE]
 > Para más información sobre los alias, por favor mira el archivo [Alias.md](https://github.com/CrisCorreaS/apuntes-git/blob/main/Alias.md)
