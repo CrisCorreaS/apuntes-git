@@ -171,15 +171,16 @@ Date:   Tue Mar 19 04:24:15 2024 +0100
 > Para saber más puedes consultar [este enlace](https://semver.org/) o [este de la documentación oficial](https://git-scm.com/book/en/v2/Git-Basics-Tagging)
 
 ## 🌳 Ramas
-### Comandos básicos de ramas
+### git branch
 - `git branch` -> Muestra todas las ramas locales de tu repositorio de GitHub y la rama en la que te encuentras actualmente se marca con un asterisco y un color diferente
 - `git branch nombreRama` -> Crea una nueva rama con el nombre especificado
-- `git switch nombreRama` -> Cambia tu rama actual por la rama que has especificado. Antes de la versión de Git 2.23 se usaba "git checkout nombreRama" para hacer esto, pero ahora es recomendable hacerlo con "git switch"
-- `git switch -c nombreRama` -> Crea una nueva rama y te mueve directamente a la rama que has creado ya que "-c" significa create. Este es el equivalente al hacer un "git branch x" para crear la rama y luego un "git switch x" para moverte a la rama, pero simplificadamente. Anteriormente se hacía "git checkout -b nombreRama" para hacer lo mismo, pero desde la versión 2.23 de Git, esto ha cambiado.
-- `git switch -c ramaNueva -t ramaOrigen` -> Crea una nueva rama basada en otra existente. Tenemos que usar la opción -c de "create" junto con la opción -t de "track" para especificar la rama de origen. La opción -t establece la nueva rama para rastrear la rama especificada, lo que significa que cuando cambiamos a la nueva rama, Git intentará rebasear automáticamente los cambios de la rama de origen. 
 - `git branch -m nombreAntiguoRama nombreNuevoRama` -> Cambiamos el nombre a la rama en la que estamos por el nombreNuevoRama. Esto se suele hacer mucho para cambiar el nombre de rama master a main.
 - `git branch -d nombreRamaBorrar` -> Borra la rama que queramos ya que el "-d" significa delete. Si hay algún cambio en la rama que no esté mergeado, nos lo va a decir y nos va a preguntar si estamos seguros. Lo ideal es tener cuidado con la rama en la que estemos, pero no va a haber ningún problema si estamos en la rama "feature1" y hacemos un "git branch -d feature1" ya que nos moverá automáticamente a otra rama, por ejemplo a "dev" o a "main".
 - `git branch -d nombreRamaBorrar -f` -> Fuerza la eliminación de la rama ya que el "-f" significa force. En este caso, si hay algún cambio en la rama que no esté mergeado, lo va a borrar sin preguntar si estamos seguros. Es mejor utilizar el comando anterior y no este.
+### git switch
+- `git switch nombreRama` -> Cambia tu rama actual por la rama que has especificado. Antes de la versión de Git 2.23 se usaba "git checkout nombreRama" para hacer esto, pero ahora es recomendable hacerlo con "git switch"
+- `git switch -c nombreRama` -> Crea una nueva rama y te mueve directamente a la rama que has creado ya que "-c" significa create. Este es el equivalente al hacer un "git branch x" para crear la rama y luego un "git switch x" para moverte a la rama, pero simplificadamente. Anteriormente se hacía "git checkout -b nombreRama" para hacer lo mismo, pero desde la versión 2.23 de Git, esto ha cambiado.
+- `git switch -c ramaNueva -t ramaOrigen` -> Crea una nueva rama basada en otra existente. Tenemos que usar la opción -c de "create" junto con la opción -t de "track" para especificar la rama de origen. La opción -t establece la nueva rama para rastrear la rama especificada, lo que significa que cuando cambiamos a la nueva rama, Git intentará rebasear automáticamente los cambios de la rama de origen. 
 
 ### 3️⃣ tipos de merges que existen con las ramas
 ![](https://github.com/CrisCorreaS/apuntes-git/blob/main/img/img2.png)
@@ -263,17 +264,17 @@ Date:   Tue Mar 19 04:24:15 2024 +0100
 
 1️⃣ Cuando creamos un repositorio ya creamos por defecto la rama **main**, por lo que tenemos que crear la rama **dev** a partir de la rama main:
 <br>
-``git switch -c dev -t main`` -> Con esto creamos la rama dev a partir de la rama main y nos situamos en la rama dev
+``git checkout -b "dev"`` -> Con esto creamos la rama dev a partir de la rama en la que estamos (main) y nos situamos en la rama dev
 <br><br>
 2️⃣ Una vez creada la rama **dev**, desarrollamos cualquier cosa y hacemos un commit _(el primer circulito de la rama dev)_ tenemos que crear a partir de esta, la rama **feature1** (la azul):
 <br>
-``git switch -c feature1 -t dev`` -> Con esto creamos la rama feature1 a partir de la rama dev y nos situamos en la rama feature1
+``git checkout -b "feature1"`` -> Con esto creamos la rama feature1 a partir de la rama dev y nos situamos en la rama feature1
 <br><br>
 3️⃣ Ahora, en la rama **feature1**, desarrollamos código y hacemos commits _(todos los círculos que tiene la rama feature1 azul)_
 <br><br>
 4️⃣ Por otro lado, nos vamos a pasar a **dev** para corregir un bug ``git switch dev`` y una vez corregido, hacemos un commit _(el segundo círculito de la rama dev)_ . Ahora que está corregido el bug, creamos la rama **feature2**:
 <br>
-``git switch -c feature2 -t dev`` -> Con esto creamos la rama feature2 a partir de la rama dev, y nos situamos en feature2
+``git checkout -b "feature2"`` -> Con esto creamos la rama feature2 a partir de la rama en la que estamos (dev), y nos situamos en feature2
 <br><br>
 5️⃣ En la rama **feature2**, desarrollamos código y hacemos un commit para guardarlo _(el único circulito de la rama feature2 naranja)_. Nos pasamos a la rama **dev** con el comando ``git switch dev`` y en la rama **dev** cambiamos el README.md y hacemos un commit _(el tercer circulito de la rama dev)_ 
 <br><br>
@@ -294,7 +295,31 @@ Date:   Tue Mar 19 04:24:15 2024 +0100
 > - ``git merge ramaQueQueremosFusionarConLaRamaEnLaQueEstamos``
 > - ``git branch -d ramaQueBorramos``
 
+## Pull Request
+Una pull request es un mecanismo utilizado en plataformas de control de versiones como GitHub, Bitbucket y GitLab para solicitar que los cambios realizados en una rama de un repositorio sean mergeados en otra rama, generalmente la rama principal o master. Este proceso permite a los colaboradores de un proyecto contribuir con sus modificaciones, mejoras o correcciones de errores de manera organizada y revisada por otros miembros del equipo antes de ser incorporadas al código base principal.
 
+### Pull Request en un proyecto ajeno
+1. Buscamos info de cómo contribuír en el archivo Contributing
+2. Hacemos un fork del repositorio y luego lo clonamos en local con `git clone url`
+3. Creamos una rama nueva según la metodología que utilicen en el proyecto y nos movemos a esa rama con `git switch -c nombreRama` o creamos una rama a partir de una en específico **situándonos en la rama que queremos copiar** y haciendo `git checkout -b nombreRama`
+4. Hacemos todos los cambios que queramos y hacemos un `git status` para saber que hemos hecho todos los cambios que queríamos
+5. Commiteamos los cambios en la rama con el mensaje siguiendo el estilo del propio repositorio
+6. Hacemos `git push origin nombreRama` para subir la rama
+7. Desde GitHub situándonos en la rama nueva podemos hacer click tanto en **Compare & Pull Request** como en **Contribute > Open Pull Request**
+8. Ahora vemos un formulario donde podemos poner el nombre de la PR, al igual que una descripción donde podemos añadir texto, enlaces e imágenes. También se pueden añadir reviewers, assigners, labels...
+9. Cuando acabemos, hacemos click en **Create pull request**
+Para más info pulsa [aquí](https://git-scm.com/book/en/v2/GitHub-Contributing-to-a-Project)
+
+### Pull Request en un proyecto como colaborador
+1. Buscamos info de cómo contribuír en el archivo Contributing
+2. Clonamos el repositorio en local con `git clone url`
+3. Creamos una rama nueva según la metodología que utilicen en el proyecto y nos movemos a esa rama con `git switch -c nombreRama` o creamos una rama a partir de una en específico **situándonos en la rama que queremos copiar** y haciendo `git checkout -b nombreRama`
+4. Hacemos todos los cambios que queramos y hacemos un `git status` para saber que hemos hecho todos los cambios que queríamos
+5. Commiteamos los cambios en la rama con el mensaje siguiendo el estilo del propio repositorio
+6. Hacemos `git push origin nombreRama` para subir la rama
+7. Desde GitHub situándonos en la rama nueva podemos hacer click tanto en **Compare & Pull Request** como en **Contribute > Open Pull Request**
+8. Ahora vemos un formulario donde podemos poner el nombre de la PR, al igual que una descripción donde podemos añadir texto, enlaces e imágenes. También se pueden añadir reviewers, assigners, labels...
+9. Cuando acabemos, hacemos click en **Create pull request**
 
 ## 🗃 Otros archivos
 
