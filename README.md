@@ -179,6 +179,7 @@ Date:   Tue Mar 19 04:24:15 2024 +0100
 - `git branch -d nombreRamaBorrar -f` -> Fuerza la eliminación de la rama ya que el "-f" significa force. En este caso, si hay algún cambio en la rama que no esté mergeado, lo va a borrar sin preguntar si estamos seguros. Es mejor utilizar el comando anterior y no este.
 ### git switch
 - `git switch nombreRama` -> Cambia tu rama actual por la rama que has especificado. Antes de la versión de Git 2.23 se usaba "git checkout nombreRama" para hacer esto, pero ahora es recomendable hacerlo con "git switch"
+- `git switch -` -> Cambia a la rama en la que estabas anteriormente. Si antes estabas en main y ahora estás en dev, vuelves a main.
 - `git switch -c nombreRama` -> Crea una nueva rama y te mueve directamente a la rama que has creado ya que "-c" significa create. Este es el equivalente al hacer un "git branch x" para crear la rama y luego un "git switch x" para moverte a la rama, pero simplificadamente. Anteriormente se hacía "git checkout -b nombreRama" para hacer lo mismo, pero desde la versión 2.23 de Git, esto ha cambiado.
 - `git switch -c ramaNueva -t ramaOrigen` -> Crea una nueva rama basada en otra existente. Tenemos que usar la opción -c de "create" junto con la opción -t de "track" para especificar la rama de origen. La opción -t establece la nueva rama para rastrear la rama especificada, lo que significa que cuando cambiamos a la nueva rama, Git intentará rebasear automáticamente los cambios de la rama de origen. 
 
