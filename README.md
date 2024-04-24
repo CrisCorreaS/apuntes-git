@@ -297,8 +297,11 @@ Date:   Tue Mar 19 04:24:15 2024 +0100
 > - ``git merge ramaQueQueremosFusionarConLaRamaEnLaQueEstamos``
 > - ``git branch -d ramaQueBorramos``
 
+![](https://github.com/CrisCorreaS/apuntes-git/blob/main/img/img6.png)
+
 ### git rebase
 - `git rebase main` → Actualiza tu rama actual incorporando los cambios realizados en la rama main en la que otros colaboradores pueden haber estado trabajando. El rebase reorganiza los commits de tu rama actual sobre los commits más recientes de la rama especificada (en este caso, "main"), lo que puede ayudar a mantener un historial de commits más limpio y lineal. Esto es útil para evitar la creación de bifurcaciones innecesarias y conflictos en el historial de tu repositorio.
+![](https://github.com/CrisCorreaS/apuntes-git/blob/main/img/img7.png)
 - `git rebase -i HEAD~X/Hash` → Es para un rebase **interactivo**. Si hacemos `git rebase -i HEAD~3` sería un rebase interactivo en la rama actual, pero limitando la interacción a los últimos tres commits. '-i' (o '--interactive') indica que el rebase será interactivo, lo que significa que Git abrirá un editor de texto para que puedas realizar cambios específicos en la historia de los commits. Cuando Git abre el editor de texto, se pueden realizar diversas acciones: reorganizar los commits, combinarlos, editar mensajes de commit, eliminar commits o incluso dividirlos en varios commits más pequeños. Este enfoque interactivo te brinda un mayor control sobre la historia de tu rama y te permite ajustarla según tus necesidades específicas.
 
 
