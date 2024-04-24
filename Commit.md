@@ -1,3 +1,4 @@
+## 📚 Todo sobre los commits
 Un commit en Git es una instantánea de los cambios realizados en un proyecto que se almacena en el repositorio local. Es la base principal del trabajo con Git, ya que permite guardar cualquier cambio realizado en el proyecto. Los commits son esenciales para el control de versiones y por eso, cada commit en Git tiene asociado un mensaje que describe los cambios realizados. Estos mensajes son importantes porque ayudan a otros colaboradores (y a ti mismo en el futuro) a entender qué cambios se hicieron y por qué se realizaron.
 
 
