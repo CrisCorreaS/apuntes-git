@@ -19,8 +19,8 @@ Para referirnos a diferentes elementos que queremos ignorar con el archivo .giti
 
 > [!NOTE]
 > Para más información puedes consultar los siguientes links:
-> [.gitignore Documentation](https://git-scm.com/docs/gitignore)
-> [Ignoring files - GitHub Docs](https://docs.github.com/en/get-started/getting-started-with-git/ignoring-files)
-> [.gitignore Tutorial - Atlassian](https://www.atlassian.com/es/git/tutorials/saving-changes/gitignore)
-> [Gitignore Explicado - freeCodeCamp](https://www.freecodecamp.org/espanol/news/gitignore-explicado-que-es-y-como-agregar-a-tu-repositorio/)
-> [.gitignore cheat sheet](https://gist.github.com/jstnlvns/ebaa046fae16543cc9efc7f24bcd0e31)
+> - [.gitignore Documentation](https://git-scm.com/docs/gitignore)
+> - [Ignoring files - GitHub Docs](https://docs.github.com/en/get-started/getting-started-with-git/ignoring-files)
+> - [.gitignore Tutorial - Atlassian](https://www.atlassian.com/es/git/tutorials/saving-changes/gitignore)
+> - [Gitignore Explicado - freeCodeCamp](https://www.freecodecamp.org/espanol/news/gitignore-explicado-que-es-y-como-agregar-a-tu-repositorio/)
+> - [.gitignore cheat sheet](https://gist.github.com/jstnlvns/ebaa046fae16543cc9efc7f24bcd0e31)
