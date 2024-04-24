@@ -1,5 +1,24 @@
-# Alias en Git
-## Alias que utilizo
+# 🥸 Alias en Git
+Los alias en Git son atajos personalizados que permiten reemplazar comandos largos de Git con versiones más cortas, facilitando y acelerando el flujo de trabajo. Se crean utilizando el comando git config, que modifica los archivos de configuración de Git, donde se almacenan configuraciones específicas del usuario y del proyecto 35.
+
+1. **Para crear un alias, se utiliza el siguiente comando:**
+- `git config [--global] alias.NombreAlias "Comando"`
+> [!NOTE]
+> Si se incluye --global, el alias se aplicará a todos los repositorios en tu sistema; de lo contrario, se aplicará solo al repositorio actual
+2. **Para ver los alias que has creado, puedes usar:**
+- `git config --get-regexp alias`
+
+3. **Para editar un alias**, simplemente crea uno nuevo con el mismo nombre, y el antiguo será reemplazado.
+4. **Para borrar un alias**, puedes usar el comando:
+- `git config --unset NombreAlias` 
+
+> [!WARNING]
+> Al crear alias, es importante tener cuidado con los nombres de los alias para evitar conflictos con comandos existentes de Git. Además, asegúrate de que los alias no sean demasiado similares a los comandos de Git existentes, ya que esto podría causar confusión. También es recomendable documentar los alias que creas para ti mismo o para tu equipo, especialmente si se utilizan en un entorno de trabajo compartido 345.
+> 
+> Al crear un alias hay que tener en cuenta que se debe de poner el comando sin el `git`, por ejemplo para hacer un alias llamado "ss" de "git status --short", deberías poner `git config --global alias.ss "status --short"`
+
+
+## 🕵‍♀ Alias que utilizo
 ```
 [alias]
 	lg = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all
@@ -10,7 +29,7 @@
 > - El alias **lg** usa la fecha relativa que muestra los commits en el orden predeterminado de Git y te dice hace cuanto se hizo el commit.
 > - El alias **lgd** usa la fecha absoluta que ordena los commits cronológicamente en formato ISO (AAAA-MM-DD).
 
-## Otros alias interesantes
+## 📍 Otros alias interesantes
 ```
 [alias]
       	aa = add -A .
