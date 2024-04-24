@@ -301,7 +301,7 @@ Date:   Tue Mar 19 04:24:15 2024 +0100
 ![](https://github.com/CrisCorreaS/apuntes-git/blob/main/img/img6.png)
 
 
-### git rebase
+### 🗺 git rebase
 - `git rebase main` → Actualiza tu rama actual incorporando los cambios realizados en la rama main en la que otros colaboradores pueden haber estado trabajando. El rebase reorganiza los commits de tu rama actual sobre los commits más recientes de la rama especificada (en este caso, "main"), lo que puede ayudar a mantener un historial de commits más limpio y lineal. Esto es útil para evitar la creación de bifurcaciones innecesarias y conflictos en el historial de tu repositorio.
 
 
@@ -310,7 +310,7 @@ Date:   Tue Mar 19 04:24:15 2024 +0100
 - `git rebase -i HEAD~X/Hash` → Es para un rebase **interactivo**. Si hacemos `git rebase -i HEAD~3` sería un rebase interactivo en la rama actual, pero limitando la interacción a los últimos tres commits. '-i' (o '--interactive') indica que el rebase será interactivo, lo que significa que Git abrirá un editor de texto para que puedas realizar cambios específicos en la historia de los commits. Cuando Git abre el editor de texto, se pueden realizar diversas acciones: reorganizar los commits, combinarlos, editar mensajes de commit, eliminar commits o incluso dividirlos en varios commits más pequeños. Este enfoque interactivo te brinda un mayor control sobre la historia de tu rama y te permite ajustarla según tus necesidades específicas.
 
 
-## Stash
+## 🔐 Stash
 El stash de Git es una funcionalidad que permite almacenar temporalmente y de forma segura los cambios realizados en el código sin necesidad de hacer un commit. Esto es útil cuando necesitas cambiar de rama, por ejemplo: para trabajar en otra rama sin perder los cambios de tu rama actual que no has subido al stage ni has commiteado. Los cambios almacenados en el stash se guardan en una pila provisional, permitiendo recuperarlos más adelante cuando estés lista para continuar con ellos.
 
 Git permite tener múltiples stashes, manejar varios al mismo tiempo puede ser complicado debido a la falta de descripciones claras para cada uno. Por defecto, los stashes se identifican simplemente como "WIP" (Work in Progress) en la rama y el commit desde el cual se crearon, lo que puede dificultar recordar qué contiene cada stash. Lo idóneo es utilizar un stash a un tiempo o anotarlos con una descripción usando un comando que veremos a continuación.
@@ -364,7 +364,7 @@ index 0000000..b9a5d52
 - `git stash drop indiceStash` → Borra los cambios guardados en stash sin aplicarlos
 - `git stash clear` → Limpia todo del stash
 
-## Pull Request (PR)
+## 💫 Pull Request (PR)
 Una pull request es un mecanismo utilizado en plataformas de control de versiones como GitHub, Bitbucket y GitLab para solicitar que los cambios realizados en una rama de un repositorio sean mergeados en otra rama, generalmente la rama principal o master. Este proceso permite a los colaboradores de un proyecto contribuir con sus modificaciones, mejoras o correcciones de errores de manera organizada y revisada por otros miembros del equipo antes de ser incorporadas al código base principal.
 
 ### Pull Request en un proyecto ajeno
