@@ -22,7 +22,7 @@
 ### ⚠️ Obligatorios para cualquier persona
 - `git config --global user.name "Nombre Apellido"` → Configura tu nombre de usuario para Git. El nombre que configures aquí se asociará con todos los commits que hagas desde tu repositorio local
 - `git config --global user.email email@email.com` → Configura tu dirección de correo electrónico para Git
-### 😇 Optativos
+### Optativos
 - `git config core.autocrlf true` →  Configura la conversión automática de los caracteres de retorno de carro (CR) y salto de línea (LF) al trabajar con archivos de texto en Git. Cuando "core.autocrlf" está configurado como true, Git automáticamente convertirá los finales de línea en los archivos de texto al formato adecuado para el sistema operativo en el que estás trabajando. Por ejemplo, si estás en un sistema operativo Windows, Git convertirá los saltos de línea LF (utilizados en sistemas Unix y Linux) a CR LF, que es el formato de fin de línea utilizado en Windows. Si estás en un sistema operativo Unix o Linux, Git convertirá los finales de línea CR LF a LF.
 - `git config --global help.autocorrect 1` → Habilita la corrección automática en Git para sugerir comandos correctos si el comando ingresado tiene una coincidencia cercana. El valor "1" habilita esta función. Por ejemplo, si introduces un comando incorrecto, Git intentará encontrar un comando similar y ejecutarlo automáticamente después de un breve período de tiempo si no se realizan otras acciones. Esto puede ayudar a reducir errores tipográficos al utilizar Git.
 
