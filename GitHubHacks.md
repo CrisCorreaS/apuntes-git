@@ -1,0 +1,4 @@
+# Hacks para GitHub
+Esta es una recopilación de trucos para hacer la experiencia de usuario en GitHub mucho más amena.
+1. Si vamos a un repositorio de GitHub y hacemos `Shift` + `<`, nos abrirá en una nueva pestaña el repositorio en un simulador de vscode. Esto es bastante interesante a la hora de ver proyectos por primera vez. Lo que hace básicamente es coger la url del repositorio que tiene un dominio "github.com" y la cambia a "github.dev"
+2. Si instalamos la extensión ["File Icons for GitHub and GitLab"](https://chromewebstore.google.com/detail/file-icons-for-github-and/ficfmibkjjnpogdcfhfokmihanoldbfe) podremos ver diferentes iconos de los tipos de archivos en GitHub, mejorando así la experiencia de usuario
