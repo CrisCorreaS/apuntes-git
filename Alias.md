@@ -21,9 +21,11 @@ Los alias en Git son atajos personalizados que permiten reemplazar comandos larg
 ## 🕵‍♀ Alias que utilizo
 ```
 [alias]
+	dfc = diff --color-words='[^[:space:]]'
 	lg = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all
 	lgd = log --date-order --date=iso --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)%ad%x08%x08%x08%x08%x08%x08%x08%x08%x08%x08%x08%x08%x08%x08%x08 %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all
-	ss = status --short
+	sts = status --short
+	stsb = status -sb
 ```
 > [!NOTE]
 > - El alias **lg** usa la fecha relativa que muestra los commits en el orden predeterminado de Git y te dice hace cuanto se hizo el commit.
@@ -47,6 +49,7 @@ Los alias en Git son atajos personalizados que permiten reemplazar comandos larg
         coom = !f() { git fetch origin master:\"$1\"; git checkout \"$1\";}; f
       	cp = cherry-pick
       	dev = !git checkout dev && git pull origin dev
+				dfc = diff --color-words='[^[:space:]]'
         dl = !git ll -1
         dlc = diff --cached HEAD^
         dmerged = !git branch --merged | grep -v '\*' | xargs -n 1 git branch -d
@@ -64,6 +67,7 @@ Los alias en Git son atajos personalizados que permiten reemplazar comandos larg
       	main = !git checkout main && git pull origin **//** main = !git symbolic-ref refs/remotes/origin/HEAD | cut -d'/' -f4
       	master = !git checkout master && git pull origin 
       	merged = branch --merged
+        pend = cherry -v origin/master
        	plo = pull origin
       	plod = pull origin dev
       	ploh = pull origin HEAD
@@ -77,8 +81,11 @@ Los alias en Git son atajos personalizados que permiten reemplazar comandos larg
       	pomg = !git push origin master && git checkout gh-pages && git pull origin gh-pages && git rebase master && git push origin gh-pages && git checkout master
       	pos = push origin staging
       	pu = !git push origin `git branch --show-current`
+				prefab = cherry -v origin/fabrication
         redate = rebase --committer-date-is-author-date
+				serve = !git daemon --reuseaddr --verbose --base-path=. --export-all ./.git
       	st = status
+				stsb = status -sb
       	staging = !git checkout staging && git pull origin staging
       	unstage = reset --soft HEAD^
 ```
