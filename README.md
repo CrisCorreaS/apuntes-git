@@ -4,6 +4,7 @@
 ![Git](https://img.shields.io/badge/-Git-F05032?style=flat-square&logo=git&logoColor=white)
 ![GitHub](https://img.shields.io/badge/-GitHub-181717?style=flat-square&logo=github&logoColor=white)
 
+## Áreas de Git
 ![](https://github.com/CrisCorreaS/apuntes-git/blob/main/img/img1.png)
 
 > [!NOTE]
@@ -13,7 +14,7 @@
 > - **M**: Modified. Indica que el archivo ha sido modificado desde el último commit.
 > - **C**: Copied. Indica que el archivo ha sido copiado dentro del mismo repositorio.
 > - **R**: Renamed. Indica que el archivo ha sido renombrado.
-> - **D**: Deleted. Indica que el archivo ha sido eliminado del directorio de trabajo pero aún no ha sido committeado el cambio.
+> - **D**: Deleted. Indica que el archivo ha sido eliminado del directorio de trabajo pero aún no ha sido commiteado el cambio.
 > - **T**: Type-change. Indica que el tipo de archivo ha cambiado, por ejemplo, de un archivo regular a un enlace simbólico o viceversa.
 > - **X** o **!**: Unmerged. Indica que el archivo tiene conflictos de fusión que aún no han sido resueltos.
 
@@ -23,7 +24,7 @@
 - `git config --global user.name "Nombre Apellido"` → Configura tu nombre de usuario para Git. El nombre que configures aquí se asociará con todos los commits que hagas desde tu repositorio local
 - `git config --global user.email email@email.com` → Configura tu dirección de correo electrónico para Git
 ### Optativos
-- `git config core.autocrlf true` →  Configura la conversión automática de los caracteres de retorno de carro (CR) y salto de línea (LF) al trabajar con archivos de texto en Git. Cuando "core.autocrlf" está configurado como true, Git automáticamente convertirá los finales de línea en los archivos de texto al formato adecuado para el sistema operativo en el que estás trabajando. Por ejemplo, si estás en un sistema operativo Windows, Git convertirá los saltos de línea LF (utilizados en sistemas Unix y Linux) a CR LF, que es el formato de fin de línea utilizado en Windows. Si estás en un sistema operativo Unix o Linux, Git convertirá los finales de línea CR LF a LF.
+- `git config core.autocrlf true` → Configura la conversión automática de los caracteres de retorno de carro (CR) y salto de línea (LF) al trabajar con archivos de texto en Git. Cuando "core.autocrlf" está configurado como true, Git automáticamente convertirá los finales de línea en los archivos de texto al formato adecuado para el sistema operativo en el que estás trabajando. Por ejemplo, si estás en un sistema operativo Windows, Git convertirá los saltos de línea LF (utilizados en sistemas Unix y Linux) a CR LF, que es el formato de fin de línea utilizado en Windows. Si estás en un sistema operativo Unix o Linux, Git convertirá los finales de línea CR LF a LF.
 - `git config --global help.autocorrect 1` → Habilita la corrección automática en Git para sugerir comandos correctos si el comando ingresado tiene una coincidencia cercana. El valor "1" habilita esta función. Por ejemplo, si introduces un comando incorrecto, Git intentará encontrar un comando similar y ejecutarlo automáticamente después de un breve período de tiempo si no se realizan otras acciones. Esto puede ayudar a reducir errores tipográficos al utilizar Git.
 
 ### Comandos más avanzados de configuración
@@ -46,14 +47,17 @@
 
 ## 📈 Comandos básicos
 - `git clone urlHTTPS` → Clona un repositorio existente de GitHub en tu repositorio remoto
+- `git clone urlHTTPS .` → Clona un repositorio Git desde la URL especificada y lo coloca en el directorio actual (representado por el punto "."). Al especificar el punto "." al final, le decimos a Git que clone el repositorio en la carpeta actual en lugar de crear una nueva con el nombre del repositorio. Hay que tener cuidado con esto porque la carpeta donde ejecutemos este comando tiene que estar vacía o si no nos dará este tipo de error: **fatal: destination path '.' already exists and is not an empty directory.**
 - `git help [comando]` → Da información resumida sobre comandos de Git lo cual se utiliza como una guía de ayuda. Si pones "git help commit", se va a abrir una ventana en el navegador con un Manual Page con información sobre "git commit"
-- `git rm nombreArchivo` → Elimina el archivo del respositorio de Git y también del sistema de archivos local. Este comando es útil cuando deseas eliminar un archivo que ya no necesitas y quieres que este cambio se refleje en el repositorio. Al ejecutar "git rm", el archivo se elimina del directorio de trabajo y del stage, pero no se elimina del historial de commits. Para que este cambio se registre en el historial, es necesario hacer un commit después de ejecutar "git rm"
 ### git add
 - `git add nombreArchivo` → Agrega ese archivo al staging area de Git
 - `git add .` → Agrega todos los archivos modificados al área de preparación (staging area) de Git
 - `git add *.extensiónArchivos` → Añade al stage todos los archivos con una extensión en específico, por ejemplo "git add *.html"
 - `git add nombreCarpeta/` → Agrega al stage todos los archivos que están en esa carpeta
 - `git add nombreCarpeta/*.extensiónArchivos` → Añade al stage todos los archivos con una extensión en específico que estén en esa carpeta, por ejemplo "git add js/*.js" añade todos los archivos .js que estén en la carpeta "js"
+- `git add -A` → Añade los archivos modificados en el directorio de trabajo al staging area. E igual que `git add .` pero incluye también los archivos que se han eliminado del directorio de trabajo. Es una manera abreviada de escribir `git add --all`. Ten cuidado porque `git add -a` no existe, es con "A" mayúscula. (Es más fácil usar `git add .`)
+- `git add -u` → Solo añade al stage archivos modificados y eliminados, pero no los nuevos archivos no rastreados (untracked). Es lo mismo que usar `git add update`. (Es más fácil usar `git add .`)
+
 ### git reset (Se puede hacer lo mismo que con un add, es como su opuesto)
 - `git reset nombreArchivo` → Elimina del staging area ese archivo si no ha sido commiteado
 - `git reset .` → Borra todos los archivos modificados al área de preparación (staging area) de Git
@@ -62,9 +66,10 @@
 - `git reset nombreCarpeta/*.extensiónArchivos` → Elimina al stage todos los archivos con una extensión en específico que estén en esa carpeta, por ejemplo "git reset js/*.js" elimina todos los archivos .js que estén en la carpeta "js"
 ### git commit
 - `git commit -m "Mensaje"` →  Crea un nuevo commit con los cambios que se encuentran en el staging area. El mensaje (-m "Mensaje") es una descripción breve de los cambios que se incluyen en el commit
-- `git commit -am "Mensaje"` → Hace un git add y un git commit a la vez gracias al "-a" que es la abreviatura de "git add" (la "m" es la abreviatura del mensaje que también utilizábamos en el anterior comando)
+- `git commit -am "Mensaje"` → Hace un git add y un git commit a la vez gracias al "-a" que es la abreviatura de "--all". Al poner el "-a" hacemos lo mismo que un `git add .`. La "m" es la abreviatura del mensaje que también utilizábamos en el anterior comando.
 - `git commit --amend` → Abre en la terminal información sobre el último commit y se puede cambiar el mensaje de este. Pero es mucho más sencillo hacerlo de la siguiente manera:
 - `git commit --amend -m "Nuevo Mensaje"` → Cambia el mensaje del último commit que has hecho por el nuevo mensaje
+- `git commit --amend --no-edit` → Es un comando perfecto para arreglar errores en los commits. Si en un commit nos falta añadir algún archivo importante, podemos hacer un `git add nombreArchivo` para poner el archivo en el stage, y luego utilizar el comando `git commit --amend --no-edit` para modificar el último commit y añadir ese archivo. "--no-edit" indica que no se debe abrir el editor de texto para modificar el mensaje del commit existente. En otras palabras, mantiene el mensaje de commit tal como está y solo modifica el contenido del commit.
 
 > [!NOTE]
 > Para saber más sobre los commits, qué es un hash, qué significa HEAD y demás, puedes consultar el archivo [Commit.md](https://github.com/CrisCorreaS/apuntes-git/blob/main/Commit.md)
@@ -77,17 +82,101 @@
 ## 📚 Para saber información
 ### git status
 - ``git status`` → Muestra el estado actual del repositorio de trabajo y el área de preparación. Proporciona información sobre qué archivos han sido modificados, agregados o eliminados desde el último commit, así como también los archivos que están en el área de preparación esperando ser confirmados en el próximo commit.
-- `git status --short` → Hace un resumen muy condensado de la información de cada archivo excepto de los que hayas commiteado pero no hayas modificado más.
+- `git status -b` → Es lo mismo que el anterior comando pero dándonos dos líneas de información sobre la rama en la que estamos y si esta está up to date o no. Es igual a poner `git status --branch`
+- `git status -s` → Hace un resumen muy condensado de la información de cada archivo excepto de los que hayas commiteado pero no hayas modificado más. Es igual a poner `git status --short`.
+> [!NOTE]
+> El comando `git status -s` muestra un resumen compacto del estado del repositorio, utilizando códigos de dos letras para representar los cambios en los archivos.
+> - A → indica que el archivo es nuevo y ha sido añadido al stage.
+> - M → indica que el archivo ha sido modificado en el directorio de trabajo y también ha sido añadido al stage.
+> - ?? → indica que el archivo es un archivo no rastreado por Git. Es Untracked.
+- `git status -sb` → Hace lo mismo pero añadiendo información sobre las ramas. Me gusta bastante este comando y creo que es muy útil cuando estás utilizando también las configuraciones de colores de status.
 
 ### git log
 - ``git log`` → Muestra un historial de todos los commits en tu repositorio. Cada commit incluye un ID de commit único, el autor del commit, la fecha y hora del commit, y un mensaje de commit que describe los cambios realizados en ese commit (por eso es muy importante configurar el nombre y el mail)
+```
+commit cccfd17f3dbb554ff4f997591c8e735ff2a96fec 
+Author: Cristina Correa <cristina.correa.segade@gmail.com>
+Date:   Fri May 24 14:28:22 2024 +0200
+
+    json modificado
+```
 - `git log nombreArchivo` → Para ver solo los commits que incluyen cambios en ese archivo. Esto es útil para rastrear la historia de un archivo en particular a lo largo del tiempo 
-- `git log --stat` → Es una versión más descriptiva del "git log" que nos da información detallada sobre los archivos que fueron modificadas y cuántas líneas se añadieron o eliminaron en cada commit.
-- `git log -p` → Es lo mismo que hacer "git log --patch". Esta es una versión mucho más descriptiva que la anterior. Aquí no solo muestra los archivos que fueron modificados y el número de líneas totales, sino que también muestra los cambios exactos: Nos dice que en "index.html" añadimos una lista desordenada mostrándola en verde, y que quitamos el encabezado de nivel uno que ahora aparece en rojo
-- `git log --since [numeroAño/]numeroMes/numeroDía` → Nos da todo el histórico de commits desde el día que hayamos puesto. Ej: "git log --since 3/6" nos da el histórico desde el 6 de Marzo de este año y "git log --since 2024/10/1" nos da el histórico desde el 1 de Octubre de 2024
-- ``git log --graph`` → Igual que el "git log" de siempre pero con una información visual a mayores de las ramas 
-- ``git log --graph --pretty=oneline`` → Igual que el anterior pero todo resumido en una línea
-- ``git log --decorate --all --oneline`` → Igual que el anterior pero con el hash mucho más simple en vez del largo
+- `git log --name-only` → Nos devuelve el log un poco más descriptivo poniendo los nombres de los archivos del commit.
+```
+commit cccfd17f3dbb554ff4f997591c8e735ff2a96fec 
+Author: Cristina Correa <cristina.correa.segade@gmail.com>
+Date:   Fri May 24 14:28:22 2024 +0200
+
+    json modificado
+
+other/info.json
+other/other.json
+other/otro.json
+other/prueba.json
+```
+- `git log --name-status` → Es una alternativa que nos da información sobre los nombres de los archivos como `git --stat` pero en vez de darnos información sobre las líneas modificadas, simplemente nos da información sobre los cambios realizados en los archivos. El "--name-status" se puede combinar con otras opciones de `git log` para hacer un log más informativo
+```
+commit cccfd17f3dbb554ff4f997591c8e735ff2a96fec 
+Author: Cristina Correa <cristina.correa.segade@gmail.com>
+Date:   Fri May 24 14:28:22 2024 +0200
+
+    json modificado
+
+A       other/info.json
+R100    other/temp.json other/other.json
+D       other/otro.json
+M       other/prueba.json
+```
+> [!NOTE]
+> Los códigos de estado en la salida del comando `git log --name-status` indican qué tipo de cambio se ha realizado en cada archivo. Aquí tienes lo que significan cada uno de esos códigos:
+> - **A** = Added (Añadido). Indica que el archivo ha sido añadido en el commit. Es un nuevo archivo que no existía antes.
+> - **D** = Deleted (Eliminado). Indica que el archivo ha sido eliminado en el commit.
+> - **M** = Modified (Modificado). Indica que el archivo ha sido modificado. Se refiere a un archivo existente que ha sido editado.
+> - **R100** = **R**: Renamed (Renombrado). Indica que el archivo ha sido renombrado. En este caso, other/temp.json ha sido renombrado a other/other.json. El número **100** indica el porcentaje de similitud entre los dos archivos. Un 100 significa que el archivo ha sido renombrado sin cambios (100% similar).
+- `git log --stat` → Es una versión más descriptiva del `git log` que nos da información detallada sobre los archivos que fueron modificadas y cuántas líneas se añadieron o eliminaron en cada commit. El "--stat" se puede combinar con otras opciones de `git log` para hacer un log más informativo
+```
+commit cccfd17f3dbb554ff4f997591c8e735ff2a96fec 
+Author: Cristina Correa <cristina.correa.segade@gmail.com>
+Date:   Fri May 24 14:28:22 2024 +0200
+
+    json modificado
+
+ other/info.json                 | 1 +
+ other/{temp.json => other.json} | 0
+ other/otro.json                 | 0
+ other/prueba.json               | 8 ++++----
+ 4 files changed, 5 insertions(+), 4 deletions(-)
+```
+- `git log -p` → Es lo mismo que hacer `git log --patch`. Esta es una versión mucho más descriptiva que la anterior. Aquí no solo muestra los archivos que fueron modificados y el número de líneas totales, sino que también muestra los cambios exactos. Ej: Nos dice que en "index.html" añadimos una lista desordenada mostrándola en verde, y que quitamos el encabezado de nivel uno que ahora aparece en rojo. El "-p" se puede combinar con otras opciones de `git log` para hacer un log más informativo
+- `git log --graph` → Igual que el "git log" de siempre pero con una información visual a mayores de las ramas. El "--graph" se puede combinar con otras opciones de `git log` para hacer un log más informativo
+- `git log --graph --pretty=oneline` → Igual que el anterior pero todo resumido en una línea
+```
+* cccfd17f3dbb554ff4f997591c8e735ff2a96fec (HEAD -> main) json modificado
+* d76e7c57cb94831c57f3d109d57ad75ae2380adb json añadido
+* 74b7c7fe5410f535adf41a0af0c6afce41cd0ea7 fotografias añadidas
+```
+- `git log --decorate --all --oneline` → Igual que el anterior pero con el hash mucho más simple en vez del largo
+```
+cccfd17 (HEAD -> main) json modificado
+d76e7c5 json añadido
+74b7c7f fotografias añadidas   
+```
+- `git log --stat --pretty=format:"%h - %an, %ar : %s"` → Es como un `git log --stat` pero la opción "--pretty=format:" personaliza la salida del log. Dentro de las comillas, se pueden usar varios placeholders para mostrar diferentes partes de cada commit.
+```
+cccfd17 - Cris Correa, 12 minutes ago : json modificado                                            
+ other/info.json                 | 1 +                                                             
+ other/{temp.json => other.json} | 0                                                               
+ other/otro.json                 | 0                                                               
+ other/prueba.json               | 8 ++++----                                                      
+ 4 files changed, 5 insertions(+), 4 deletions(-)    
+```
+> [!NOTE]
+> Veamos qué significa cada placeholder de "--pretty=format:"
+> - **%h** = El hash abreviado del commit.
+> - **%an** = El nombre del autor del commit.
+> - **%ar** = La fecha del commit en formato relativo (por ejemplo, "2 weeks ago").
+> - **%s** = El mensaje del commit.
+- `git log --since [numeroAño/]numeroMes/numeroDía` → Nos da todo el histórico de commits desde el día que hayamos puesto. Ej: `git log --since 3/6` nos da el histórico desde el 6 de Marzo de este año y `git log --since 2024/10/1` nos da el histórico desde el 1 de Octubre de 2024
 
 ### git diff
 - `git diff` → Muestra las diferencias entre dos estados diferentes en el respositorio Git. Estos estados pueden ser entre el directorio de trabajo y el stage, entre el stage y el commit más reciente, o entre dos commits diferentes. Cuando ejecutas "git diff" sin ningún argumento adicional, muestra las diferencias entre el directorio de trabajo y el staging area, es decir, las modificaciones que aún no se han añadido al tatage. Esto te permite revisar los cambios que has realizado antes de confirmarlos con un commit. (Es más visual la herramienta de visualización de vscode)
@@ -96,12 +185,14 @@
 - `git diff hashCommit` → Enseña las diferencias entre el directorio de trabajo y el commit especificado.
 - `git diff hashCommitInicial hashCommitFinal` → Muestra las diferencias entre dos commits específicos.
 - `git diff ramaInicial ramaFinal` → Enseña las diferencias entre dos ramas específicas.
+- `git diff --color-words='[^[:space:]]'` → Es una forma avanzada de usar `git diff` que destaca las diferencias en un modo más granular y enfocado en palabras individuales en lugar de líneas completas. Básicamente muestra el documento completo poniendo en rojo las letras o palabras eliminadas y en verde las añadidas sin poner el antes y el después.La opción `--color-words` colorea las diferencias a nivel de palabras en lugar de líneas completas. La expresión regular `'[^[:space:]]'` especifica cómo definir una "palabra" para el propósito del resaltado de diferencias. `[^...]` es una clase de caracteres negados, que coincide con cualquier carácter que no esté dentro de los corchetes y `[:space:]` es una clase de caracteres POSIX que coincide con cualquier carácter de espacio en blanco (como espacio, tabulación, nueva línea, etc.). En conjunto, `[^[:space:]]` coincide con cualquier carácter que no sea un espacio en blanco. En otras palabras, cada secuencia continua de caracteres no espaciales se considera una "palabra".
 
 ### git reflog
-- `git reflog` → Muestra un registro de referencia del historial de cambios realizados en HEAD (puntero a la rama actual) y otras referencias de Git, como ramas y etiquetas. La palabra "reflog" es una abreviatura de "registro de referencia de log". Este registro puede ser útil para recuperar cambios perdidos o deshacer acciones no deseadas, como restablecer ramas a estados anteriores o recuperar commits eliminados accidentalmente con "git reset --hard".
+- `git reflog` → Muestra un registro de referencia del historial de cambios realizados en HEAD (puntero a la rama actual) y otras referencias de Git, como ramas y etiquetas. La palabra "reflog" es una abreviatura de "registro de referencia de log". Este registro puede ser útil para recuperar cambios perdidos o deshacer acciones no deseadas, como restablecer ramas a estados anteriores o recuperar commits eliminados accidentalmente con `git reset --hard`.
 
 ### git show
 - `git show hashCommit` → Muestra información detallada sobre un commit específico identificado por su hash. Proporciona detalles específicos del commit seleccionado, incluyendo el autor, la fecha, el mensaje del commit y los cambios introducidos por ese commit. No solo muestra las diferencias como hace "git diff", sino también la información del commit en sí (autor, fecha y mensaje). Es útil para inspeccionar un commit específico en detalle y comprender qué cambios se introdujeron en él.
+- `git show --color-words='[^[:space:]]'` → Es similar a `git diff --color-words='[^[:space:]]'` en términos de funcionalidad y propósitos, pero se usa específicamente para mostrar los detalles de un commit en particular. (mirar la referencia para más explicaciones)
 - `git show nombreTag` →  Nos enseña información sobre la tag. Para info más detallada ir a "tags"
 
 ## 📝 Para hacer modificaciones
@@ -111,14 +202,71 @@
 
 ### git reset
 - ``git reset []`` → Permite RESTABLECER tu estado actual a un estado específico. Puedes restablecer el estado de archivos específicos, así como el de toda una rama. Esto es útil si aún no has subido tu commit a GitHub o a otro repositorio remoto. El git reset también se podía usar como la antítesis de "git add" como vimos anteriormente.
-- `git reset --soft HEAD^Numero/hashCommit` → Borra un commit pero guarda los cambios en el stage (gracias al --soft). Es decir, git moverá la rama actual hacia el commit especificado, pero mantendrá los cambios realizados en el staging area. Esto significa que los cambios se retiran del commit, pero permanecen listos para ser confirmados nuevamente con un nuevo commit. Aquí se puede usar "HEAD^Numero" o el propio hash del commit que queramos eliminar. Si queremos eliminar el último commit sería "git reset --soft HEAD^1". Esto se usa por ejemplo si en el commit x se te olvidó poner otros archivos y quieres incluirlos. Tu lo que haces es borrar ese commit y crear uno nuevo con los archivos del commit anterior (con sus modificaciones guardadas) y los que quisieras añadir. **Esto se puede hacer antes de hacer un push, si se ha hecho, evita hacerlo**
-- `git reset --mixed HEAD^Numero/hashCommit` → Borra un commit, no guarda los cambios en el stage pero sí que los guarda en el área de trabajo local (gracias al --mixed). Este es el comportamiento predeterminado de "git reset" si no se especifica ningún argumento. Con "--mixed", Git moverá la rama actual hacia el commit especificado y deshará los cambios en el staging area, pero mantendrá los cambios en el directorio de trabajo. Esto significa que los cambios deshechos no se perderán, pero tendrás que agregarlos nuevamente al stage si deseas confirmarlos nuevamente. **Esto se puede hacer antes de hacer un push, si se ha hecho, evita hacerlo**
-- `git reset --hard HEAD^Numero/hashCommit` → Elimina el commit con todos los cambios, es decir, que los archivos modificados que se guardasen en ese commit, volverían a estar como estaban en el último commit antes de ese. Es una acción "destructiva", por lo que se debe tener cuidado al usarlo, ya que los cambios deshechos no se pueden recuperar fácilmente. Se recomienda utilizarlo con precaución y asegurarse de que realmente deseas eliminar los cambios. Por ejemplo si tengo tres commits y hago el reset hard del segundo commit, los archivos que estuvieran modificados y guardados en el segundo commit, volverían a su estado inicial guardado en el primer commit, pero no se guardarían las modificaciones que se hicieron entre el primer y el segundo commit (porque estaban guardadas en el segundo commit que ha sido borrado). Si borramos algo que no deberíamos, podemos hacer un "git reflog" ver a qué punto queremos volver, buscar el hash que nos interesa restaurar y hacer un "git reset --hard" con ese hash. **Esto se puede hacer antes de hacer un push, si se ha hecho, evita hacerlo**
-- `git reset --hard` → Resetea el stage y el directorio de trabajo al último commit actual. Esto significa que todos los cambios no commiteados en el directorio de trabajo y en el stage serán descartados, y el estado del repositorio volverá al último commit. Este comando es muy poderoso y debe usarse con precaución, ya que los cambios no commiteados se perderán permanentemente. Es bastante parecido a "git checkout -- .", salvo que el "git checkout -- ." sí que guarda los cambios que se subieron al stage.
+- `git reset --soft HEAD^Numero/hashCommit` → Borra un commit pero guarda los cambios en el stage (gracias al --soft). Es decir, git moverá la rama actual hacia el commit especificado, pero mantendrá los cambios realizados en el staging area. Esto significa que los cambios se retiran del commit, pero permanecen listos para ser confirmados nuevamente con un nuevo commit. Aquí se puede usar "HEAD^Numero" o el propio hash del commit que queramos eliminar. Si queremos eliminar el último commit sería `git reset --soft HEAD^1`. Esto se usa por ejemplo si en el commit x se te olvidó poner otros archivos y quieres incluirlos. Tu lo que haces es borrar ese commit y crear uno nuevo con los archivos del commit anterior (con sus modificaciones guardadas) y los que quisieras añadir. **Esto se puede hacer antes de hacer un push, si se ha hecho, evita hacerlo**
+- `git reset --mixed HEAD^Numero/hashCommit` → Borra un commit, no guarda los cambios en el stage pero sí que los guarda en el área de trabajo local (gracias al --mixed). Este es el comportamiento predeterminado de `git reset` si no se especifica ningún argumento. Con "--mixed", Git moverá la rama actual hacia el commit especificado y deshará los cambios en el staging area, pero mantendrá los cambios en el directorio de trabajo. Esto significa que los cambios deshechos no se perderán, pero tendrás que agregarlos nuevamente al stage si deseas confirmarlos nuevamente. **Esto se puede hacer antes de hacer un push, si se ha hecho, evita hacerlo**
+- `git reset --hard HEAD^Numero/hashCommit` → Elimina el commit con todos los cambios, es decir, que los archivos modificados que se guardasen en ese commit, volverían a estar como estaban en el último commit antes de ese. Es una acción "destructiva", por lo que se debe tener cuidado al usarlo, ya que los cambios deshechos no se pueden recuperar fácilmente. Se recomienda utilizarlo con precaución y asegurarse de que realmente deseas eliminar los cambios. Por ejemplo si tengo tres commits y hago el reset hard del segundo commit, los archivos que estuvieran modificados y guardados en el segundo commit, volverían a su estado inicial guardado en el primer commit, pero no se guardarían las modificaciones que se hicieron entre el primer y el segundo commit (porque estaban guardadas en el segundo commit que ha sido borrado). Si borramos algo que no deberíamos, podemos hacer un `git reflog` ver a qué punto queremos volver, buscar el hash que nos interesa restaurar y hacer un `git reset --hard` con ese hash. **Esto se puede hacer antes de hacer un push, si se ha hecho, evita hacerlo**
+- `git reset --hard` → Resetea el stage y el directorio de trabajo al último commit actual. Esto significa que todos los cambios no commiteados en el directorio de trabajo y en el stage serán descartados, y el estado del repositorio volverá al último commit. Este comando es muy poderoso y debe usarse con precaución, ya que los cambios no commiteados se perderán permanentemente. Es bastante parecido a `git checkout -- .`, salvo que el `git checkout -- .` sí que guarda los cambios que se subieron al stage.
+> [!NOTE]
+> **Si queremos eliminar el último commit**, lo ideal es hacer `git reset --soft HEAD~1` para mantener los cambios en el directorio de trabajo. Esto moverá la rama actual para que apunte al commit anterior, pero los cambios realizados en el último commit permanecerán en el stage.
 
 ### git mv
 - `git mv nombreAntiguo nombreNuevo` → Renombra o mueve archivos o directorios de Git. En lugar de usar el comando "mv" del sistema de archivos, que Git puede interpretar como eliminar el archivo antiguo y agregar uno nuevo, "git mv" realiza la acción de manera más inteligente, lo que ayuda a mantener el historial de versiones del archivo. Cuando cambiamos el archivo de nombre con "git mv", nos aparece una "R" de Rename. Ejemplos de esto serían: "git mv app/index.html app/indexcambiado.html" para cambiar un archivo de una carpeta o "git mv css styles" para cambiar el nombre de una carpeta
 
+## 🗑 Para borrar archivos
+### git rm
+- `git rm nombreArchivo.extensionArchivo` → Elimina el archivo del repositorio de Git y también del sistema de archivos local. Este comando es útil cuando deseas eliminar un archivo que ya no necesitas y quieres que este cambio se refleje en el repositorio. Al ejecutar `git rm`, el archivo se elimina del directorio de trabajo y del stage, pero no se elimina del historial de commits. Para que este cambio se registre en el historial, es necesario hacer un commit después de ejecutar `git rm`
+- `git rm -r nombreDirectorio/` → Elimina el directorio y todo su contenido del repositorio de Git y también del sistema de archivos local. Con "-r" que es "--recursive" indicamos que elimine no solo el directorio especificado, sino también todo su contenido, incluidos los archivos y subdirectorios que pueda contener.
+- `git rm --cached nombreArchivo.extensionArchivo` → Elimina el archivo de una forma diferente al `git rm` estándar porque en vez de eliminarlo del sistema de archivos local, aparece el archivo como "Untracked". 
+> [!NOTE] 
+> Si creamos un archivo, lo añadimos al stage y lo commiteamos, nos aparecerá un log como este al hacer `git log --name-status`:
+> ```
+> commit 74c789a8c4bcfc3b29037b94c89b1da1affe3731 (HEAD -> main)
+> Author: Cris Correa <cristina.correa.segade@gmail.com>
+> Date:   Fri May 47 12:56:40 2024 +0200
+> 
+>     json añadido
+> 
+> A       other/file.json
+> ```
+> Ahora si hacemos `git rm other/file.json` eliminamos el archivo del repositorio y nos aparece la siguiente información si hacemos un `git status`:
+> ```
+> Changes to be committed:
+>   (use "git restore --staged <file>..." to unstage)
+>         deleted:    other/file.json
+> ```
+> Sin embargo, si en vez de haber hecho `git rm other/file.json` hacemos `git rm --cached other/file.json` y luego ejecutamos un `git status`, nos aparecerá la siguiente información:
+> ```
+> Changes to be committed:
+>   (use "git restore --staged <file>..." to unstage)
+>         deleted:    other/file.json
+> 
+> Untracked files:
+>   (use "git add <file>..." to include in what will be committed)
+>         other/file.json
+> ```
+> Ahí podemos ver que cuando no añadimos "--cached", el archivo se elimina y desaparece del repositorio, mientras que si sí que añadimos "--cached", el archivo aparece en el repositorio como untracked.
+### git clean
+- `git clean -n` → El comando `git clean` se utiliza para eliminar archivos no rastreados en el directorio de trabajo (untracked). Esto es útil para limpiar el directorio de trabajo de archivos innecesarios que no están bajo control de versiones. Cuando añadimos "-n", que significa "dry run" o "prueba en seco", Git simula la operación de limpieza y muestra qué archivos serían eliminados sin realmente borrarlos. Es una manera segura de ver los cambios que se realizarán antes de llevarlos a cabo. Si ejecutamos `git clean -n` cuando tenemos un archivo untracked, nos aparecería un mensaje `Would remove nombreArchivo.extensionArchivo` por cada archivo untracked.
+- `git clean -f` → Elimina todos los archivos untracked y nos devuelve un mensaje por cada archivo borrado de la siguiente manera: `Removing nombreArchivo.extensionArchivo`
+- `git clean -df` → Elimina los archivos no rastreados (untracked) y los directorios (con "-d") del directorio de trabajo. El "-d" requiere de otras opciones para poder borrar carpetas con archivos. Si queremos borrar la carpeta "log/" con varios archivos .log y ejecutamos `git clean -d` nos dará el siguiente error: `fatal: clean.requireForce defaults to true and neither -i, -n, nor -f given; refusing to clean` pero si ejecutamos `git clean -fd` nos devolverá `Removing log/` ya que "-f" fuerza el borrado.
+- `git clean -xf` → Elimina todos los archivos ignorados por .gitignore, además de los archivos no rastreados. Necesita añadir "-f" o dará el mismo error que en el anterior comando.
+- `git clean -Xf` → Elimina únicamente los archivos ignorados por .gitignore.
+> [!NOTE]
+> Si en un .gitignore ponemos que se ignoren los archivos con extensión ".py" y creamos los archivos: prueba.py y prueba.java. El ".py" será ignorado y el ".java" estará untracked.
+> - Si ejecutamos `git clean -xf`, se eliminarán tanto prueba.py como prueba.java
+> - Si ejecutamos `git clean -Xf`, se eliminará únicamente el prueba.py
+> - Si ejecutamos `git clean -f`, se eliminará únicamente el prueba.java
+> ```
+> $ git clean -xf
+>   Removing prueba.java
+>   Removing prueba.py
+>
+> $ git clean -Xf
+>   Removing prueba.py
+>
+> $ git clean -f
+>   Removing prueba.java
+> ```
 ## 🕵 Para alias
 - ``git config --global alias.nombreAlias "comando"`` → Esto te crea un alias que luego puedes utilizar haciendo "git nombreAlias" y hace el mismo comando que estás poniendo ahí. Cuando decimos "comando", nos referimos a todo lo que vaya después de "git", ya que si en el comando ponemos "git ..." nos va a dar el error "expansion of alias 'nombreAlias' failed; 'git' is not a git command", por lo que **NO ponemos "git" dentro del comando"
 
@@ -176,15 +324,40 @@ Date:   Tue Mar 19 04:24:15 2024 +0100
 ## 🌳 Ramas
 ### git branch
 - `git branch` → Muestra todas las ramas locales de tu repositorio de GitHub y la rama en la que te encuentras actualmente se marca con un asterisco y un color diferente
+- `git branch -a` → Muestra una lista de todas las ramas en el repositorio, tanto locales como remotas. Es útil para ver todas las ramas disponibles en el proyecto y poder cambiar a la que queramos. El "-a" significa "--all".
+> Un ejemplo de la diferencia entre `git branch` y `git branch -a` sería el siguiente:
+> Si ejecutamos el comando `git branch` en un repositorio que acabamos de clonar y donde aún no hemos creado ninguna rama, solo nos aparecerá la rama main donde estamos situados.
+> ```
+> * main
+> ```
+> Si escribimos el comando `git branch -a` podremos ver las ramas remotas que existen en el repositorio como: dev, feature1 y feature2
+> ```
+> * main 
+>   remotes/origin/HEAD -> origin/main
+>   remotes/origin/dev
+>   remotes/origin/feature1
+>   remotes/origin/feature2
+>   remotes/origin/main
+> ```
+- `git branch -r` → Muestra únicamente las ramas remotas del repositorio. Las ramas remotas son las que existen en el servidor remoto (como GitHub, GitLab, etc.) y no necesariamente están disponibles localmente. El "-r" significa "--remote". Si no hay ninguna rama remota, simplemente no devolverá ninguna rama. Con el ejemplo anterior, si hacemos `git branch -r` nos devolverá lo siguiente:
+```
+  remotes/origin/HEAD -> origin/main
+  remotes/origin/dev
+  remotes/origin/feature1
+  remotes/origin/feature2
+  remotes/origin/main
+```
 - `git branch nombreRama` → Crea una nueva rama con el nombre especificado
-- `git branch -m nombreAntiguoRama nombreNuevoRama` → Cambiamos el nombre a la rama en la que estamos por el nombreNuevoRama. Esto se suele hacer mucho para cambiar el nombre de rama master a main.
-- `git branch -d nombreRamaBorrar` → Borra la rama que queramos ya que el "-d" significa delete. Si hay algún cambio en la rama que no esté mergeado, nos lo va a decir y nos va a preguntar si estamos seguros. Lo ideal es tener cuidado con la rama en la que estemos, pero no va a haber ningún problema si estamos en la rama "feature1" y hacemos un "git branch -d feature1" ya que nos moverá automáticamente a otra rama, por ejemplo a "dev" o a "main".
-- `git branch -d nombreRamaBorrar -f` → Fuerza la eliminación de la rama ya que el "-f" significa force. En este caso, si hay algún cambio en la rama que no esté mergeado, lo va a borrar sin preguntar si estamos seguros. Es mejor utilizar el comando anterior y no este.
+- `git branch -m nombreAntiguoRama nombreNuevoRama` → Cambiamos el nombre a la rama en la que estamos por el nombreNuevoRama. Esto se suele hacer mucho para cambiar el nombre de rama master a main. "-m" significa "--move"
+- `git branch -M nombreNuevoRama` → Renombra la rama en la que nos encontramos sin importar si ya existe una rama con ese nombre. Si hacemos `git branch -M dev` renombrará la rama en la que nos encontramos a "dev" y por lo tanto, cualquier rama "dev" previamente existente será reemplazada por la rama actual. Esto significa que cualquier trabajo que se haya realizado en la rama "dev" anterior será perdido si no se ha fusionado en otra rama antes de ejecutar este comando. Por esta razón, es importante usar este comando con precaución, especialmente en un entorno de trabajo colaborativo. "-M" con "M" mayúscula significa "--move --force"
+- `git branch -d nombreRamaBorrar` → Borra la rama que queramos ya que el "-d" significa delete. Si hay algún cambio en la rama que no esté mergeado, nos lo va a decir y nos va a preguntar si estamos seguros. Lo ideal es tener cuidado con la rama en la que estemos, pero no va a haber ningún problema si estamos en la rama "feature1" y hacemos un ´git branch -d feature1` ya que nos moverá automáticamente a otra rama, por ejemplo a "dev" o a "main".
+- `git branch -d nombreRamaBorrar -f` → Fuerza la eliminación de la rama ya que el "-f" significa force. En este caso, si hay algún cambio en la rama que no esté mergeado, lo va a borrar sin preguntar si estamos seguros. Es mejor utilizar el comando anterior y no este. Es lo mismo que hacer `git branch -D nombreRamaBorrar` ("-D" con D mayúscula es como la suma de "-d" y "-f")
+- `git branch -t nombreRama origin/nombreRama` → Crea una nueva rama local llamada y establece una relación de seguimiento con la rama remota. Esto significa que la nueva rama local estará vinculada a la rama remota y Git configurará de manera automática el seguimiento para permitir comandos como git pull y git push sin especificar explícitamente las ramas remotas y locales. El "-t" es igual a "--track". Un ejemplo de este comando sería `git branch --track feature1 origin/feature1` 
 ### git switch
 - `git switch nombreRama` → Cambia tu rama actual por la rama que has especificado. Antes de la versión de Git 2.23 se usaba "git checkout nombreRama" para hacer esto, pero ahora es recomendable hacerlo con "git switch". Si quieres cambiar de rama cuando tienes código en el área de trabajo local que no has subido al stage, te va a dar un fallo como este: *error: Your local changes to the following files would be overwritten by checkout: nombre de archivo* *Please commit your changes or stash thm before you switch branches.* *Aborting*. Esto quiere decir que como tienes el código sin guardar, no vas a poder cambiarte de rama porque si no se te perderían todas las modificaciones. Para eso o bien haces un commit o bien subes los cambios al stash.
 - `git switch -` → Cambia a la rama en la que estabas anteriormente. Si antes estabas en main y ahora estás en dev, vuelves a main.
-- `git switch -c nombreRama` → Crea una nueva rama y te mueve directamente a la rama que has creado ya que "-c" significa create. Este es el equivalente al hacer un "git branch x" para crear la rama y luego un "git switch x" para moverte a la rama, pero simplificadamente. Anteriormente se hacía "git checkout -b nombreRama" para hacer lo mismo, pero desde la versión 2.23 de Git, esto ha cambiado.
-- `git switch -c ramaNueva -t ramaOrigen` → Crea una nueva rama basada en otra existente. Tenemos que usar la opción -c de "create" junto con la opción -t de "track" para especificar la rama de origen. La opción -t establece la nueva rama para rastrear la rama especificada, lo que significa que cuando cambiamos a la nueva rama, Git intentará rebasear automáticamente los cambios de la rama de origen. 
+- `git switch -c nombreRama` → Crea una nueva rama y te mueve directamente a la rama que has creado ya que "-c" significa "--create". Este es el equivalente al hacer un "git branch x" para crear la rama y luego un "git switch x" para moverte a la rama, pero simplificadamente. Anteriormente se hacía "git checkout -b nombreRama" para hacer lo mismo, pero desde la versión 2.23 de Git, esto ha cambiado.
+- `git switch -c ramaNueva -t ramaOrigen` → Crea una nueva rama basada en otra existente. Tenemos que usar la opción "-c" de "create" junto con la opción "-t" de "--track" para especificar la rama de origen. La opción "-t" establece la nueva rama para rastrear la rama especificada, lo que significa que cuando cambiamos a la nueva rama, Git intentará rebasear automáticamente los cambios de la rama de origen. 
 
 ### 3️⃣ tipos de merges que existen con las ramas
 ![](https://github.com/CrisCorreaS/apuntes-git/blob/main/img/img2.png)
