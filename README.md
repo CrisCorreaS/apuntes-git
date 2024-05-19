@@ -539,34 +539,7 @@ index 0000000..b9a5d52
 - `git stash drop indiceStash` → Borra los cambios guardados en stash sin aplicarlos
 - `git stash clear` → Limpia todo del stash
 
-## 💫 Pull Request (PR)
-Una pull request es un mecanismo utilizado en plataformas de control de versiones como GitHub, Bitbucket y GitLab para solicitar que los cambios realizados en una rama de un repositorio sean mergeados en otra rama, generalmente la rama principal o master. Este proceso permite a los colaboradores de un proyecto contribuir con sus modificaciones, mejoras o correcciones de errores de manera organizada y revisada por otros miembros del equipo antes de ser incorporadas al código base principal.
-
-### Pull Request en un proyecto ajeno
-1. Buscamos info de cómo contribuír en el archivo Contributing
-2. Hacemos un fork del repositorio y luego lo clonamos en local con `git clone url`
-3. Creamos una rama nueva según la metodología que utilicen en el proyecto y nos movemos a esa rama con `git switch -c nombreRama` o creamos una rama a partir de una en específico **situándonos en la rama que queremos copiar** y haciendo `git checkout -b nombreRama`
-4. Hacemos todos los cambios que queramos y hacemos un `git status` para saber que hemos hecho todos los cambios que queríamos
-5. Commiteamos los cambios en la rama con el mensaje siguiendo el estilo del propio repositorio
-6. Hacemos `git push origin nombreRama` para subir la rama
-7. Desde GitHub situándonos en la rama nueva podemos hacer click tanto en **Compare & Pull Request** como en **Contribute > Open Pull Request**
-8. Ahora vemos un formulario donde podemos poner el nombre de la PR, al igual que una descripción donde podemos añadir texto, enlaces e imágenes. También se pueden añadir reviewers, assigners, labels...
-9. Cuando acabemos, hacemos click en **Create pull request**
-Para más info pulsa [aquí](https://git-scm.com/book/en/v2/GitHub-Contributing-to-a-Project)
-
-### Pull Request en un proyecto como colaborador
-1. Buscamos info de cómo contribuír en el archivo Contributing
-2. Clonamos el repositorio en local con `git clone url`
-3. Creamos una rama nueva según la metodología que utilicen en el proyecto y nos movemos a esa rama con `git switch -c nombreRama` o creamos una rama a partir de una en específico **situándonos en la rama que queremos copiar** y haciendo `git checkout -b nombreRama`
-4. Hacemos todos los cambios que queramos y hacemos un `git status` para saber que hemos hecho todos los cambios que queríamos
-5. Commiteamos los cambios en la rama con el mensaje siguiendo el estilo del propio repositorio
-6. Hacemos `git push origin nombreRama` para subir la rama
-7. Desde GitHub situándonos en la rama nueva podemos hacer click tanto en **Compare & Pull Request** como en **Contribute > Open Pull Request**
-8. Ahora vemos un formulario donde podemos poner el nombre de la PR, al igual que una descripción donde podemos añadir texto, enlaces e imágenes. También se pueden añadir reviewers, assigners, labels...
-9. Cuando acabemos, hacemos click en **Create pull request**
-
 ## 🗃 Otros archivos
-
 ### .gitignore
 - `.gitignore` → Se utiliza para especificar archivos y directorios que Git debe ignorar al rastrear los cambios en un repositorio. Puedes usar patrones de coincidencia de nombres de archivo para definir qué archivos y carpetas deben ser ignorados por Git. Por ejemplo, puedes incluir patrones para ignorar archivos de compilación, archivos temporales o archivos específicos generados por el sistema. Esto ayuda a mantener el repositorio limpio y evitar que archivos innecesarios sean incluidos en el control de versiones. Se suele poner en la raíz del proyecto, donde también debería de ir la carpeta ".git" que indica que se ha inicializado el repositorio. 
 
