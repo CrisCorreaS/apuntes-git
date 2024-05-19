@@ -73,7 +73,25 @@ NombrePersona mentioned this issue #numeroIssue X time ago
 Mensaje commit
 X tasks
 ```
-1. Un buen esqueleto de la descripción de una PR es el siguiente:
+4. A la hora de hacer una PR tenemos que revisar lo siguiente:
+      - Criterios de aceptación y que la tarea que teníamos se haya completado correctamente
+      - Efectos secundarios como bugs
+      - Legibilidad del código
+      - Mantenibilidad y escalabilidad
+      - Consistencia para que el código cumpla con los estándares de estilo definidos en el proyecto
+      - Performance para verificar que el código esté optimizado
+      - Manejo de excepciones
+      - Simplicidad
+      - Pruebas para verificar que no se rompa ningún test del código
+5. A la hora de hacer un code review de una PR es importante:
+      - Juzgar al código, no al desarrollador
+      - Preguntar, no dar órdenes
+      - Responder todos los comentarios o preguntas que te hayan hecho
+      - Tratar a la gente con respeto
+6. En las PRs podemos ir a **"Files changed"** y al darle al botón de la ruedita, podemos ver en qué formato de diff vamos a ver los cambios, personalmente a mí me gusta más el "Split"
+7. Los números que se ven a la derecha de la PR que indican el total de líneas creadas y eliminadas se llaman "delta". Es una buena práctica que el delta de una PR no supere las 200 líneas, ya que más de 200 líneas son difíciles de revisar.
+8. En una PR también podemos crear verificaciones especiales en el apartado de **"Checks"**. Con las verificaciones podemos limitar la posibilidad de hacer merge del PR. Estas verificaciones pueden ser checks de que todos los tests unitarios funcionan, y si hay alguno que falla, se bloquee el merge; también podemos verificar que el build del proyecto se ejecuta sin errores o que el código cumpla con ciertos estándares.
+9.  Un buen esqueleto de la descripción de una PR es el siguiente:
 ```
 ## Descripción
 Descripción breve de la tarea o tareas a realizar
