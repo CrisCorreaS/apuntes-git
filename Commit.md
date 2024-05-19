@@ -70,7 +70,15 @@ times a single line commit message is enough.
 ❌ fixed header transition on mobile
 ```
 6. Es correcto hacer todos los commits en inglés ya que es el estándar y no dará ningún problema a la hora de ver tiles o "ñ"
-
+7. Si queremos hacer una referencia en el título del mensaje del commit a una issue, debemos de poner la referencia siempre al principio de la frase, no al final.
+```
+✅ feat #985: introduce chat view name
+✅ feat (#985): introduce chat view name
+❌ feat: introduce chat view name. Fix #985
+❌ fix #985
+❌ fix (#985)
+❌ fix for #985
+```
 ### Definiciones de estilos
 Para crear un log que es fácil de navegar y mejorar la mantenibilidad del proyecto, hay aspectos que también se deben de definir a la hora de escribir los mensajes de los commits:
 - Si se debería de poner un punto "." al final del commit o no
